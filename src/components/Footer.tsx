@@ -11,7 +11,7 @@ export const Footer: React.FC = () => {
     <footer className="bg-urban-50/80 pt-12 pb-8 mt-16 border-t border-urban-100/30">
       <div className="max-w-3xl mx-auto px-4">
         <div className="text-center">
-          {/* Logo y nombre igual que en el header, con imagen - clickeable */}
+          {/* Logo y nombre dinámico - clickeable */}
           <button 
             onClick={() => navigate('/')}
             className="flex items-center justify-center gap-2 mb-4 group select-none focus:outline-none focus:ring-2 focus:ring-urban-400 rounded-lg p-2 mx-auto"

@@ -19,7 +19,7 @@ export const HeroSection = () => {
 
   return (
     <section className="relative mb-15 py-0">
-      {/* Banner principal */}
+      {/* Banner principal con imagen dinámica */}
       <div className="w-full max-w-7xl mx-auto overflow-hidden relative rounded-b-3xl shadow-xl">
         <AspectRatio ratio={window.innerWidth < 768 ? 16 / 9 : 24 / 9} className="bg-gradient-to-br from-urban-100 to-urban-200 rounded-b-3xl">
           <div className="relative w-full h-full overflow-hidden rounded-b-3xl" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
@@ -42,7 +42,7 @@ export const HeroSection = () => {
         </AspectRatio>
       </div>
 
-      {/* Avatar destacado */}
+      {/* Avatar destacado con logo dinámico */}
       <div className="relative">
         <div className="max-w-4xl mx-auto flex justify-center -mt-20 z-30 relative">
           <div className="rounded-full bg-white shadow-xl ring-2 ring-urban-100/60 p-1.5">
@@ -56,7 +56,7 @@ export const HeroSection = () => {
         </div>
       </div>
 
-      {/* Nombre y descripción */}
+      {/* Nombre y descripción dinámicos */}
       <div className="text-center mt-8 mb-12">
         <h1 className="text-4xl md:text-5xl font-extrabold text-urban-800 mb-3 tracking-tight drop-shadow-sm">
           {businessConfig.name}
