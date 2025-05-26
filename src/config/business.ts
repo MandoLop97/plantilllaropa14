@@ -3,7 +3,7 @@ import { useBusinessData } from '../hooks/useBusinessData';
 
 // Configuración por defecto (fallback)
 const DEFAULT_CONFIG = {
-  name: 'Urban Style',
+  name: 'Verduras chino',
   description: 'Tu destino para la moda urbana más fresca',
   tagline: 'Calidad, estilo y autenticidad en cada prenda',
   logo: {
