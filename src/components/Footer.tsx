@@ -1,10 +1,11 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BUSINESS_CONFIG } from '../config/business';
+import { useBusinessConfig } from '../config/business';
 
 export const Footer: React.FC = () => {
   const navigate = useNavigate();
+  const businessConfig = useBusinessConfig();
 
   return (
     <footer className="bg-urban-50/80 pt-12 pb-8 mt-16 border-t border-urban-100/30">
@@ -17,36 +18,36 @@ export const Footer: React.FC = () => {
           >
             <div className="w-9 h-9 sm:w-12 sm:h-12 bg-gradient-to-br from-urban-400 to-urban-600 rounded-full flex items-center justify-center shadow-md transition-transform duration-200 group-hover:scale-110 overflow-hidden">
               <img
-                src={BUSINESS_CONFIG.logo.url}
-                alt={BUSINESS_CONFIG.logo.alt}
+                src={businessConfig.logo.url}
+                alt={businessConfig.logo.alt}
                 className="w-full h-full object-contain"
               />
             </div>
             <h3 className="text-lg sm:text-2xl font-extrabold text-gray-900 tracking-tight group-hover:text-urban-600 transition-colors duration-200">
-              {BUSINESS_CONFIG.name}
+              {businessConfig.name}
             </h3>
           </button>
           
           <p className="text-urban-700/80 mb-6 max-w-md mx-auto text-base font-medium">
-            {BUSINESS_CONFIG.description}.<br />
-            <span className="text-urban-600/80">{BUSINESS_CONFIG.tagline}.</span>
+            {businessConfig.description}.<br />
+            <span className="text-urban-600/80">Calidad, estilo y autenticidad en cada prenda.</span>
           </p>
           
           {/* Estado y horarios */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
             <div className="flex items-center gap-2 bg-urban-100/60 px-4 py-1 rounded-full text-xs font-semibold text-urban-600 border border-urban-100 shadow-sm">
               <span className="w-2.5 h-2.5 bg-green-400 rounded-full inline-block"></span>
-              <span>{BUSINESS_CONFIG.schedule.status}</span>
+              <span>¡Estamos atendiendo!</span>
             </div>
             <div className="flex gap-2 mt-2 sm:mt-0">
               <span className="inline-block bg-urban-50 text-urban-600 px-3 py-1 rounded-full text-xs font-medium border border-urban-100">
-                {BUSINESS_CONFIG.schedule.weekdays}
+                Lun-Vie: 9-18h
               </span>
               <span className="inline-block bg-urban-50 text-urban-600 px-3 py-1 rounded-full text-xs font-medium border border-urban-100">
-                {BUSINESS_CONFIG.schedule.saturday}
+                Sáb: 10-16h
               </span>
               <span className="inline-block bg-urban-50 text-urban-400 px-3 py-1 rounded-full text-xs font-medium border border-urban-100">
-                {BUSINESS_CONFIG.schedule.sunday}
+                Dom: Cerrado
               </span>
             </div>
           </div>
@@ -54,7 +55,7 @@ export const Footer: React.FC = () => {
           {/* Redes sociales */}
           <div className="flex justify-center gap-5 mt-8 mb-2">
             <a
-              href={BUSINESS_CONFIG.social.facebook}
+              href="https://facebook.com/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
@@ -68,7 +69,7 @@ export const Footer: React.FC = () => {
           
           <div className="mt-8 pt-6 border-t border-urban-100/30">
             <p className="text-xs text-gray-400">
-              © 2024 {BUSINESS_CONFIG.name}. Todos los derechos reservados.
+              © 2024 {businessConfig.name}. Todos los derechos reservados.
             </p>
           </div>
         </div>

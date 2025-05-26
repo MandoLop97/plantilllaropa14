@@ -4,6 +4,7 @@ import { Menu, Search, ShoppingCart } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 import { Cart } from './Cart';
 import { useNavigate } from 'react-router-dom';
+import { useBusinessConfig } from '../config/business';
 
 interface HeaderProps {
   onMenuClick: () => void;
@@ -14,6 +15,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
   const [isVisible, setIsVisible] = useState(false);
   const { itemCount } = useCart();
   const navigate = useNavigate();
+  const businessConfig = useBusinessConfig();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,13 +59,13 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
             >
               <div className="w-9 h-9 sm:w-12 sm:h-12 bg-gradient-to-br from-urban-400 to-urban-600 rounded-full flex items-center justify-center shadow-md transition-transform duration-200 group-hover:scale-110 overflow-hidden">
                 <img
-                  src="https://cdn.abacus.ai/images/65fc5268-61a6-423e-b9f1-2a8fa1e3681d.png"
-                  alt="Logo Urban Style"
+                  src={businessConfig.logo.url}
+                  alt={businessConfig.logo.alt}
                   className="w-full h-full object-contain"
                 />
               </div>
               <h1 className="text-lg sm:text-2xl font-extrabold text-gray-900 tracking-tight group-hover:text-urban-600 transition-colors duration-200">
-                Urban Style
+                {businessConfig.name}
               </h1>
             </button>
           </div>
