@@ -7,11 +7,11 @@ const DEFAULT_CONFIG = {
   description: 'Tu destino para la moda urbana más fresca',
   tagline: 'Calidad, estilo y autenticidad en cada prenda',
   logo: {
-    url: 'https://cdn.abacus.ai/images/65fc5268-61a6-423e-b9f1-2a8fa1e3681d.png',
+    url: 'https://yxrkezxytovaxlpjnbda.supabase.co/storage/v1/object/public/infonegocio/Logo/b73218d6-186e-4bc0-8956-4b3db300abb4/1748140857465.png',
     alt: 'Logo Urban Style'
   },
   banner: {
-    url: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&h=400&fit=crop&q=80',
+    url: 'https://yxrkezxytovaxlpjnbda.supabase.co/storage/v1/object/public/infonegocio/Banner/b73218d6-186e-4bc0-8956-4b3db300abb4/1748140454942.png',
     alt: 'Banner Urban Style'
   }
 };
