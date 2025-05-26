@@ -8,7 +8,7 @@ export const TEMPLATE_CONFIG = {
   
   // Configuración de desarrollo
   development: {
-    useLocalData: true, // true para usar datos locales, false para Supabase
+    useLocalData: false, // true para usar datos locales, false para Supabase
     enableDataSync: true, // Habilitar herramientas de sincronización
     showDebugInfo: false // Mostrar información de debug
   },
