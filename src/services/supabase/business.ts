@@ -1,29 +1,6 @@
 
 import { supabase } from '../../integrations/supabase/client';
 
-const BUSINESS_ID = 'b73218d6-186e-4bc0-8956-4b3db300abb4';
-
-// Recupera los datos del negocio desde Supabase
-const fetchNegocio = async () => {
-  try {
-    const { data, error } = await supabase
-      .from('negocios')
-      .select('id, nombre, descripcion, logo_url, banner_url')
-      .eq('id', BUSINESS_ID)
-      .single();
-
-    if (error) {
-      console.error('Error fetching negocio:', error);
-      return null;
-    }
-
-    return data;
-  } catch (error) {
-    console.error('Error in fetchNegocio:', error);
-    return null;
-  }
-};
-
 export interface BusinessData {
   id: string;
   nombre: string;
@@ -36,6 +13,8 @@ export const BusinessService = {
   // Obtener datos del negocio específico
   async getBusinessById(id: string): Promise<BusinessData | null> {
     try {
+      console.log('Buscando negocio con ID:', id);
+      
       const { data, error } = await supabase
         .from('negocios')
         .select('id, nombre, descripcion, logo_url, banner_url')
@@ -48,10 +27,11 @@ export const BusinessService = {
       }
 
       if (!data) {
-        console.warn('Business not found');
+        console.warn('Business not found with ID:', id);
         return null;
       }
 
+      console.log('Business data found:', data);
       return data;
     } catch (error) {
       console.error('Error in getBusinessById:', error);

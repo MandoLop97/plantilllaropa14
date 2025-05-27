@@ -4,23 +4,6 @@ import { BusinessService } from '../services/supabase/business';
 
 const BUSINESS_ID = 'b73218d6-186e-4bc0-8956-4b3db300abb4';
 
-// Recupera los datos del negocio desde Supabase
-const fetchNegocio = async () => {
-  try {
-    const data = await BusinessService.getBusinessById(BUSINESS_ID);
-
-    if (!data) {
-      console.warn('Negocio no encontrado');
-      return null;
-    }
-
-    return data;
-  } catch (error) {
-    console.error('Error in fetchNegocio:', error);
-    return null;
-  }
-};
-
 // Configuración por defecto (fallback)
 const DEFAULT_CONFIG = {
   name: 'Verduras chino',
@@ -28,14 +11,13 @@ const DEFAULT_CONFIG = {
   tagline: 'Del campo a tu mesa, con sabor y calidad natural',
   logo: {
     url: 'https://yxrkezxytovaxlpjnbda.supabase.co/storage/v1/object/public/infonegocio/Logo/b73218d6-186e-4bc0-8956-4b3db300abb4/1748140857465.png',
-    alt: 'Logo Urban Style'
+    alt: 'Logo Verduras chino'
   },
   banner: {
     url: 'https://yxrkezxytovaxlpjnbda.supabase.co/storage/v1/object/public/infonegocio/Banner/b73218d6-186e-4bc0-8956-4b3db300abb4/1748140454942.png',
-    alt: 'Banner Urban Style'
+    alt: 'Banner Verduras chino'
   }
 };
-
 
 // Hook para obtener configuración dinámica del negocio
 export const useBusinessConfig = () => {
@@ -46,9 +28,11 @@ export const useBusinessConfig = () => {
   });
 
   useEffect(() => {
-    const fetchConfig = async () => {
+    const fetchBusinessData = async () => {
+      console.log('Iniciando carga de datos del negocio...');
       try {
-        const data = await fetchNegocio();
+        const data = await BusinessService.getBusinessById(BUSINESS_ID);
+        console.log('Datos recibidos del negocio:', data);
 
         if (data) {
           setConfig({
@@ -67,15 +51,24 @@ export const useBusinessConfig = () => {
             error: null
           });
         } else {
-          setConfig(cfg => ({ ...cfg, loading: false, error: 'Negocio no encontrado' }));
+          console.warn('No se encontraron datos del negocio, usando configuración por defecto');
+          setConfig(cfg => ({ 
+            ...cfg, 
+            loading: false, 
+            error: 'Negocio no encontrado' 
+          }));
         }
       } catch (err) {
         console.error('Error loading business data:', err);
-        setConfig(cfg => ({ ...cfg, loading: false, error: 'Error al cargar los datos del negocio' }));
+        setConfig(cfg => ({ 
+          ...cfg, 
+          loading: false, 
+          error: 'Error al cargar los datos del negocio' 
+        }));
       }
     };
 
-    fetchConfig();
+    fetchBusinessData();
   }, []);
 
   return config;
@@ -84,7 +77,7 @@ export const useBusinessConfig = () => {
 // Configuración específica del negocio - Mantiene compatibilidad con código existente
 export const BUSINESS_CONFIG = {
   // Información del negocio
-  name: 'Urban Style',
+  name: 'Verduras chino',
   description: 'Tu rincón de verduras frescas y saludables',
   tagline: 'Del campo a tu mesa, con sabor y calidad natural',
   
@@ -106,15 +99,15 @@ export const BUSINESS_CONFIG = {
   
   // Logo
   logo: {
-    url: 'https://cdn.abacus.ai/images/65fc5268-61a6-423e-b9f1-2a8fa1e3681d.png',
-    alt: 'Logo Urban Style'
+    url: 'https://yxrkezxytovaxlpjnbda.supabase.co/storage/v1/object/public/infonegocio/Logo/b73218d6-186e-4bc0-8956-4b3db300abb4/1748140857465.png',
+    alt: 'Logo Verduras chino'
   }
 } as const;
 
 // Configuración de la tienda
 export const STORE_CONFIG = {
   // Configuración de productos
-  defaultCategory: 'camisetas',
+  defaultCategory: 'verduras',
   productsPerPage: 12,
   
   // Configuración de precios
