@@ -14,7 +14,6 @@ export const BusinessService = {
   async getBusinessById(id: string): Promise<BusinessData | null> {
     try {
       console.log('🔍 Buscando negocio con ID:', id);
-      console.log('🔗 Supabase URL configurada:', supabase.supabaseUrl);
       
       const { data, error } = await supabase
         .from('negocios')
