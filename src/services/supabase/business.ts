@@ -13,7 +13,8 @@ export const BusinessService = {
   // Obtener datos del negocio específico
   async getBusinessById(id: string): Promise<BusinessData | null> {
     try {
-      console.log('Buscando negocio con ID:', id);
+      console.log('🔍 Buscando negocio con ID:', id);
+      console.log('🔗 Supabase URL configurada:', supabase.supabaseUrl);
       
       const { data, error } = await supabase
         .from('negocios')
@@ -21,20 +22,37 @@ export const BusinessService = {
         .eq('id', id)
         .maybeSingle();
 
+      console.log('📊 Respuesta completa de Supabase:', { data, error });
+
       if (error) {
-        console.error('Error fetching business:', error);
+        console.error('❌ Error de Supabase:', error);
+        console.error('❌ Código de error:', error.code);
+        console.error('❌ Mensaje de error:', error.message);
         return null;
       }
 
       if (!data) {
-        console.warn('Business not found with ID:', id);
+        console.warn('⚠️ No se encontró negocio con ID:', id);
+        
+        // Intentar listar todos los negocios para debug
+        const { data: allBusinesses, error: listError } = await supabase
+          .from('negocios')
+          .select('id, nombre')
+          .limit(5);
+        
+        if (listError) {
+          console.error('❌ Error listando negocios:', listError);
+        } else {
+          console.log('📋 Negocios disponibles:', allBusinesses);
+        }
+        
         return null;
       }
 
-      console.log('Business data found:', data);
+      console.log('✅ Datos del negocio encontrados:', data);
       return data;
     } catch (error) {
-      console.error('Error in getBusinessById:', error);
+      console.error('💥 Error inesperado en getBusinessById:', error);
       return null;
     }
   }

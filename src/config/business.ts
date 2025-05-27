@@ -29,12 +29,15 @@ export const useBusinessConfig = () => {
 
   useEffect(() => {
     const fetchBusinessData = async () => {
-      console.log('Iniciando carga de datos del negocio...');
+      console.log('🚀 Iniciando carga de datos del negocio...');
+      console.log('🎯 ID del negocio a buscar:', BUSINESS_ID);
+      
       try {
         const data = await BusinessService.getBusinessById(BUSINESS_ID);
-        console.log('Datos recibidos del negocio:', data);
+        console.log('📦 Datos recibidos del negocio:', data);
 
         if (data) {
+          console.log('✅ Configurando datos del negocio...');
           setConfig({
             name: data.nombre || DEFAULT_CONFIG.name,
             description: data.descripcion || DEFAULT_CONFIG.description,
@@ -51,7 +54,7 @@ export const useBusinessConfig = () => {
             error: null
           });
         } else {
-          console.warn('No se encontraron datos del negocio, usando configuración por defecto');
+          console.warn('⚠️ No se encontraron datos del negocio, usando configuración por defecto');
           setConfig(cfg => ({ 
             ...cfg, 
             loading: false, 
@@ -59,7 +62,7 @@ export const useBusinessConfig = () => {
           }));
         }
       } catch (err) {
-        console.error('Error loading business data:', err);
+        console.error('💥 Error loading business data:', err);
         setConfig(cfg => ({ 
           ...cfg, 
           loading: false, 
@@ -70,6 +73,15 @@ export const useBusinessConfig = () => {
 
     fetchBusinessData();
   }, []);
+
+  // Debug: mostrar el estado actual en la consola
+  useEffect(() => {
+    console.log('📊 Estado actual del config:', {
+      loading: config.loading,
+      error: config.error,
+      name: config.name
+    });
+  }, [config.loading, config.error, config.name]);
 
   return config;
 };
