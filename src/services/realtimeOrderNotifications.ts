@@ -30,7 +30,7 @@ export class RealtimeOrderNotifications {
             logger.info('Datos de la orden:', { orderData });
 
             // Llamar al webhook de N8n
-            const webhookUrl = 'https://mandowebhookn8n.mextv.fun/webhook/sendPush';
+            const webhookUrl = 'https://mandowebhookn8n.mextv.fun/webhook/send';
             logger.info('Enviando notificación al webhook:', { webhookUrl });
 
             const response = await fetch(webhookUrl, {
