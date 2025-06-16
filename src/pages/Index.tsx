@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { HeroSection } from '../components/HeroSection';
@@ -74,7 +73,7 @@ const Index = () => {
   // Show loading state while business is being loaded
   if (businessLoading || businessConfig.loading) {
     return (
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen bg-white flex flex-col">
         <div className="animate-pulse">
           <div className="h-16 bg-gray-200 mb-2"></div>
           <div className="h-80 bg-gray-200 mb-2"></div>
@@ -85,38 +84,23 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen bg-white flex flex-col">
       <Header onMenuClick={() => setIsSidebarOpen(true)} />
       
       <main className="flex-grow">
-        {/* HeroSection con fondo transparente para mostrar el patrón */}
-        <div className="bg-transparent-light rounded-3xl mx-4 my-2 overflow-hidden">
-          <HeroSection />
+        <HeroSection />
+        <div id="product-section" className="py-2">
+          <ProductSection categories={categories} />
         </div>
-        
-        {/* ProductSection con fondo glass */}
-        <div id="product-section" className="py-2 mx-4">
-          <div className="bg-glass rounded-2xl p-4">
-            <ProductSection categories={categories} />
-          </div>
-        </div>
-        
-        {/* PromotionBanner sin fondo adicional para que use su propio diseño */}
         <div className="py-2">
           <PromotionBanner />
         </div>
-        
-        {/* BusinessMap con fondo transparente oscuro */}
-        <div className="py-2 mx-4">
-          <div className="bg-transparent-dark rounded-2xl p-4">
-            <BusinessMap />
-          </div>
+        <div className="py-2">
+          <BusinessMap />
         </div>
       </main>
       
-      <div className="bg-glass-dark">
-        <Footer />
-      </div>
+      <Footer />
       
       {/* Floating Cart with item count indicator */}
       <FloatingCart onClick={() => setIsCartOpen(true)} />
