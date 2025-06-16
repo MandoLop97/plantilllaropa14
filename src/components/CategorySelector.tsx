@@ -8,12 +8,14 @@ interface CategorySelectorProps {
   categories: Category[];
   selectedCategory: string;
   onCategorySelect: (categoryId: string) => void;
+  transparent?: boolean;
 }
 
 export const CategorySelector: React.FC<CategorySelectorProps> = ({
   categories,
   selectedCategory,
-  onCategorySelect
+  onCategorySelect,
+  transparent = false
 }) => {
   const {
     carouselRef,
@@ -47,16 +49,24 @@ export const CategorySelector: React.FC<CategorySelectorProps> = ({
     return fallbackMap[categoryName] || 'https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=400&h=400&fit=crop&crop=center';
   };
 
+  const containerClasses = transparent 
+    ? "relative mb-6 py-4 rounded-2xl bg-transparent-light"
+    : "relative mb-6";
+
   return (
-    <div className="relative mb-6">
+    <div className={containerClasses}>
       {/* Contenedor principal optimizado para móviles */}
       <div className="w-full relative">
         {/* Fades laterales SOLO en mobile */}
         <div className="pointer-events-none absolute top-0 left-0 h-full w-4 z-20 block sm:hidden" style={{
-          background: 'linear-gradient(to right, #fff 60%, transparent 100%)'
+          background: transparent 
+            ? 'linear-gradient(to right, rgba(255,255,255,0.8) 60%, transparent 100%)'
+            : 'linear-gradient(to right, #fff 60%, transparent 100%)'
         }} />
         <div className="pointer-events-none absolute top-0 right-0 h-full w-4 z-20 block sm:hidden" style={{
-          background: 'linear-gradient(to left, #fff 60%, transparent 100%)'
+          background: transparent 
+            ? 'linear-gradient(to left, rgba(255,255,255,0.8) 60%, transparent 100%)'
+            : 'linear-gradient(to left, #fff 60%, transparent 100%)'
         }} />
 
         <div 

@@ -21,6 +21,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 interface ProductSectionProps {
   categories: Category[];
+  transparent?: boolean;
 }
 
 const ResponsiveSkeleton: React.FC<{
@@ -100,7 +101,10 @@ const ProductSectionSkeleton = () => {
   );
 };
 
-export const ProductSection: React.FC<ProductSectionProps> = ({ categories }) => {
+export const ProductSection: React.FC<ProductSectionProps> = ({ 
+  categories, 
+  transparent = false 
+}) => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   // Seleccionar la primera categoría disponible desde el inicio
   const [selectedCategory, setSelectedCategory] = useState<string>(() => categories[0]?.id || '');
@@ -174,11 +178,12 @@ export const ProductSection: React.FC<ProductSectionProps> = ({ categories }) =>
   return (
     <section className="py-0">
       <div className={UI_CONFIG.CONTAINER_CLASSES}>
-        {/* Category Selector */}
+        {/* Category Selector con opción de transparencia */}
         <CategorySelector
           categories={categories}
           selectedCategory={selectedCategory}
           onCategorySelect={handleCategorySelect}
+          transparent={transparent}
         />
 
         {/* Products Grid */}
