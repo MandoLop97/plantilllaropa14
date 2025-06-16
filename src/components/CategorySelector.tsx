@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCarouselScroll } from '../hooks/useCarouselScroll';
@@ -170,6 +171,7 @@ export const CategorySelector: React.FC<CategorySelectorProps> = ({
                           `} 
                         />
                       </motion.div>
+                    </motion.div>
                     
                     {/* Nombre de la categoría optimizado para móviles */}
                     <motion.span 
