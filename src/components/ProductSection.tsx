@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo } from 'react';
 import { Category } from '../types';
 import { ProductCard } from './ProductCard';
@@ -41,14 +42,8 @@ const ProductSectionSkeleton = () => {
   const maxProducts = isMobile ? 6 : 8;
 
   return (
-    <section 
-      className="py-0 relative"
-      style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fef3f2' fill-opacity='0.3'%3E%3Cpath d='M40 40c6.6 0 12-5.4 12-12s-5.4-12-12-12-12 5.4-12 12 5.4 12 12 12zm0-8c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        backgroundColor: '#fefefe'
-      }}
-    >
-      <div className={`${UI_CONFIG.CONTAINER_CLASSES} relative z-10`}>
+    <section className="py-0">
+      <div className={UI_CONFIG.CONTAINER_CLASSES}>
         <div className="relative mb-4">
           <div className="flex gap-3 overflow-x-auto no-scrollbar py-2 px-2">
             {[...Array(4)].map((_, idx) => (
@@ -156,14 +151,8 @@ export const ProductSection: React.FC<ProductSectionProps> = ({ categories }) =>
 
   if (error) {
     return (
-      <section 
-        className="py-0 relative"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fef3f2' fill-opacity='0.3'%3E%3Cpath d='M40 40c6.6 0 12-5.4 12-12s-5.4-12-12-12-12 5.4-12 12 5.4 12 12 12zm0-8c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          backgroundColor: '#fefefe'
-        }}
-      >
-        <div className={`${UI_CONFIG.CONTAINER_CLASSES} relative z-10`}>
+      <section className="py-0">
+        <div className={UI_CONFIG.CONTAINER_CLASSES}>
           <div className="text-center py-8">
             <div className="w-16 h-16 mx-auto mb-3 bg-red-100 rounded-full flex items-center justify-center">
               <span className="text-2xl text-red-500">⚠️</span>
@@ -183,14 +172,8 @@ export const ProductSection: React.FC<ProductSectionProps> = ({ categories }) =>
   }
 
   return (
-    <section 
-      className="py-0 relative"
-      style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fef3f2' fill-opacity='0.3'%3E%3Cpath d='M40 40c6.6 0 12-5.4 12-12s-5.4-12-12-12-12 5.4-12 12 5.4 12 12 12zm0-8c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        backgroundColor: '#fefefe'
-      }}
-    >
-      <div className={`${UI_CONFIG.CONTAINER_CLASSES} relative z-10`}>
+    <section className="py-0">
+      <div className={UI_CONFIG.CONTAINER_CLASSES}>
         {/* Category Selector */}
         <CategorySelector
           categories={categories}
