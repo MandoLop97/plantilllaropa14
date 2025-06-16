@@ -50,14 +50,22 @@ export const CategorySelector: React.FC<CategorySelectorProps> = ({
   return (
     <div className="relative mb-6">
       {/* Contenedor principal optimizado para móviles */}
-      <div className="w-full relative">
+      <div className="w-full relative px-2 sm:px-0">
         {/* Fades laterales SOLO en mobile */}
-        <div className="pointer-events-none absolute top-0 left-0 h-full w-4 z-20 block sm:hidden" style={{
-          background: 'linear-gradient(to right, #fff 60%, transparent 100%)'
-        }} />
-        <div className="pointer-events-none absolute top-0 right-0 h-full w-4 z-20 block sm:hidden" style={{
-          background: 'linear-gradient(to left, #fff 60%, transparent 100%)'
-        }} />
+        <div
+          className="pointer-events-none absolute top-0 left-0 h-full w-6 z-20 block sm:hidden"
+          style={{
+            background:
+              'linear-gradient(to right, hsl(var(--background)) 60%, transparent 100%)'
+          }}
+        />
+        <div
+          className="pointer-events-none absolute top-0 right-0 h-full w-6 z-20 block sm:hidden"
+          style={{
+            background:
+              'linear-gradient(to left, hsl(var(--background)) 60%, transparent 100%)'
+          }}
+        />
 
         <div 
           ref={carouselRef} 
@@ -65,7 +73,7 @@ export const CategorySelector: React.FC<CategorySelectorProps> = ({
             scrollSnapType: 'x mandatory',
             WebkitOverflowScrolling: 'touch'
           }} 
-          className={`relative z-10 flex flex-nowrap py-4 gap-4 sm:gap-6
+          className={`relative z-10 flex flex-nowrap py-3 sm:py-4 gap-4 sm:gap-6
             ${categories.length > 0 ? 'overflow-x-auto no-scrollbar px-4 sm:px-0 sm:overflow-visible sm:justify-center' : 'justify-center px-4'}
           `}
         >
@@ -139,7 +147,7 @@ export const CategorySelector: React.FC<CategorySelectorProps> = ({
                             ? 'ring-3 ring-primary-400/70 shadow-xl' 
                             : 'ring-2 ring-neutral-200 hover:ring-primary-300 shadow-md group-hover:ring-primary-400/50'
                           }
-                          w-14 h-14 sm:w-18 sm:h-18 lg:w-20 lg:h-20
+                          w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24
                         `}
                       >
                         <motion.img 
@@ -178,7 +186,7 @@ export const CategorySelector: React.FC<CategorySelectorProps> = ({
                         duration: 0.3
                       }} 
                       className={`relative text-center transition-all duration-300 mt-2 leading-tight
-                        text-xs sm:text-sm lg:text-base max-w-14 sm:max-w-18 lg:max-w-20
+                        text-xs sm:text-sm lg:text-base max-w-16 sm:max-w-20 lg:max-w-24
                         ${isSelected ? 'text-primary-600' : 'text-neutral-700 group-hover:text-primary-600'}
                       `}
                     >
