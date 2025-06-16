@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { HeroSection } from '../components/HeroSection';
@@ -85,27 +84,23 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen bg-white flex flex-col">
       <Header onMenuClick={() => setIsSidebarOpen(true)} />
       
       <main className="flex-grow">
-        <div className="bg-hero-glass">
-          <HeroSection />
-        </div>
-        <div id="product-section" className="py-2 bg-transparent-glass">
+        <HeroSection />
+        <div id="product-section" className="py-2">
           <ProductSection categories={categories} />
         </div>
-        <div className="py-2 bg-transparent-light">
+        <div className="py-2">
           <PromotionBanner />
         </div>
-        <div className="py-2 bg-semi-transparent">
+        <div className="py-2">
           <BusinessMap />
         </div>
       </main>
       
-      <div className="bg-transparent-glass">
-        <Footer />
-      </div>
+      <Footer />
       
       {/* Floating Cart with item count indicator */}
       <FloatingCart onClick={() => setIsCartOpen(true)} />
