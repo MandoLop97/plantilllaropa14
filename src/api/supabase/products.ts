@@ -2,7 +2,43 @@
 import { supabase } from './client';
 import { logger } from '../../utils/logger';
 import { Product } from '../../types';
-import { SupabaseProduct, mapSupabaseProductToLocal } from '../../types/supabase';
+
+// Simple interface for Supabase product data
+interface SupabaseProductData {
+  id: string;
+  nombre: string;
+  precio: number;
+  precio_original?: number;
+  imagen_url?: string;
+  categoria_id?: string;
+  categoria?: string;
+  descripcion?: string;
+  sku?: string;
+  negocio_id: string;
+  disponible: boolean;
+  created_at?: string;
+  updated_at?: string;
+}
+
+// Simple mapping function without complex type dependencies
+const mapSupabaseToLocal = (data: SupabaseProductData): Product => {
+  const discount = data.precio_original && data.precio_original > data.precio 
+    ? Math.round(((data.precio_original - data.precio) / data.precio_original) * 100)
+    : 0;
+
+  return {
+    id: data.id,
+    name: data.nombre,
+    price: data.precio,
+    originalPrice: data.precio_original,
+    image: data.imagen_url || '/placeholder.svg',
+    categoryId: data.categoria_id || '',
+    category: data.categoria || '',
+    description: data.descripcion || '',
+    sku: data.sku || data.id,
+    discount: discount > 0 ? discount : undefined
+  };
+};
 
 export const ProductsService = {
   // Obtener productos por negocio
@@ -20,7 +56,7 @@ export const ProductsService = {
         return [];
       }
 
-      return (data || []).map(mapSupabaseProductToLocal);
+      return (data || []).map(mapSupabaseToLocal);
     } catch (error) {
       logger.error('Error in getProductsByBusiness:', undefined, error as Error);
       return [];
@@ -43,7 +79,7 @@ export const ProductsService = {
         return [];
       }
 
-      return (data || []).map(mapSupabaseProductToLocal);
+      return (data || []).map(mapSupabaseToLocal);
     } catch (error) {
       logger.error('Error in getProductsByCategory:', undefined, error as Error);
       return [];
@@ -85,7 +121,7 @@ export const ProductsService = {
         return null;
       }
 
-      return mapSupabaseProductToLocal(data as SupabaseProduct);
+      return mapSupabaseToLocal(data as SupabaseProductData);
     } catch (error) {
       logger.error('Error in create product:', undefined, error as Error);
       return null;
@@ -94,7 +130,7 @@ export const ProductsService = {
 
   async update(id: string, productData: Partial<Product>): Promise<Product | null> {
     try {
-      const updateData: any = {};
+      const updateData: Record<string, any> = {};
       
       if (productData.name) updateData.nombre = productData.name;
       if (productData.price !== undefined) updateData.precio = productData.price;
@@ -117,7 +153,7 @@ export const ProductsService = {
         return null;
       }
 
-      return mapSupabaseProductToLocal(data as SupabaseProduct);
+      return mapSupabaseToLocal(data as SupabaseProductData);
     } catch (error) {
       logger.error('Error in update product:', undefined, error as Error);
       return null;
