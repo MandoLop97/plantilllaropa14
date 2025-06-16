@@ -2,8 +2,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, Gift, Tag, Timer } from 'lucide-react';
+import { usePromotionBanner } from '../hooks/usePromotionBanner';
 
 export const PromotionBanner = () => {
+  const { data: bannerData } = usePromotionBanner();
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -34,8 +36,7 @@ export const PromotionBanner = () => {
 
   // Countdown timer logic
   useEffect(() => {
-    const now = new Date();
-    const endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+    const endDate = new Date(bannerData.expiresAt);
 
     const timer = setInterval(() => {
       const currentTime = new Date().getTime();
@@ -53,7 +54,7 @@ export const PromotionBanner = () => {
       }
     }, 1000);
     return () => clearInterval(timer);
-  }, []);
+  }, [bannerData.expiresAt]);
 
   const containerVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -87,21 +88,21 @@ export const PromotionBanner = () => {
               <motion.div variants={itemVariants} className="text-center lg:text-left">
                 <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-primary-100 font-medium mb-4">
                   <Gift size={16} />
-                  <span className="text-sm">Oferta Especial</span>
+                  <span className="text-sm">{bannerData.label}</span>
                 </div>
                 
                 <h4 className="text-3xl md:text-4xl font-bold text-white mb-3">
-                  25% OFF
+                  {bannerData.title}
                 </h4>
                 
                 <p className="text-lg text-primary-100 mb-4 leading-relaxed">
-                  En toda la tienda. Aprovecha esta oportunidad única.
+                  {bannerData.description}
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-3 items-center lg:items-start lg:justify-start justify-center mb-6">
                   <div className="flex items-center gap-2 bg-white/15 backdrop-blur-sm px-3 py-1.5 rounded-full">
                     <Tag size={14} className="text-primary-200" />
-                    <span className="text-primary-100 font-mono font-semibold text-sm">URBAN25</span>
+                    <span className="text-primary-100 font-mono font-semibold text-sm">{bannerData.couponCode}</span>
                   </div>
                 </div>
                 
@@ -110,7 +111,7 @@ export const PromotionBanner = () => {
                   whileTap={{ scale: 0.98 }} 
                   className="bg-white text-primary-700 font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 inline-flex items-center gap-2"
                 >
-                  <span>Comprar Ahora</span>
+                  <span>{bannerData.buttonText}</span>
                   <Sparkles size={16} />
                 </motion.button>
               </motion.div>

@@ -9,4 +9,5 @@ export { ClientsService } from './supabase/clients';
 export { OrdersService } from './supabase/orders';
 export { ServiciosService } from './supabase/servicios';
 export { CitasService } from './supabase/citas';
+export { PromotionBannerService } from './supabase/promotionBanner';
 
