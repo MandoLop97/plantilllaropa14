@@ -493,6 +493,76 @@ export type Database = {
           },
         ]
       }
+      metodo_envio: {
+        Row: {
+          created_at: string
+          "Emvio Económico": string | null
+          "Envio Express": string | null
+          "Envio Gratis": string | null
+          id: string
+          Motoenvio: string | null
+          negocio_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          "Emvio Económico"?: string | null
+          "Envio Express"?: string | null
+          "Envio Gratis"?: string | null
+          id?: string
+          Motoenvio?: string | null
+          negocio_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          "Emvio Económico"?: string | null
+          "Envio Express"?: string | null
+          "Envio Gratis"?: string | null
+          id?: string
+          Motoenvio?: string | null
+          negocio_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "metodo_envio_negocio_id_fkey1"
+            columns: ["negocio_id"]
+            isOneToOne: false
+            referencedRelation: "negocios"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      metodo_pago: {
+        Row: {
+          created_at: string
+          Efectivo: string | null
+          id: string
+          negocio_id: string | null
+          "Transferencia Bancaria": string | null
+        }
+        Insert: {
+          created_at?: string
+          Efectivo?: string | null
+          id?: string
+          negocio_id?: string | null
+          "Transferencia Bancaria"?: string | null
+        }
+        Update: {
+          created_at?: string
+          Efectivo?: string | null
+          id?: string
+          negocio_id?: string | null
+          "Transferencia Bancaria"?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "metodo_envio_negocio_id_fkey"
+            columns: ["negocio_id"]
+            isOneToOne: false
+            referencedRelation: "negocios"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       negocios: {
         Row: {
           background_color: string | null

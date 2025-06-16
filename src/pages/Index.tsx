@@ -84,23 +84,27 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen flex flex-col">
       <Header onMenuClick={() => setIsSidebarOpen(true)} />
       
       <main className="flex-grow">
-        <HeroSection />
-        <div id="product-section" className="py-2">
+        <div className="bg-transparent-light">
+          <HeroSection />
+        </div>
+        <div id="product-section" className="py-2 bg-transparent-glass">
           <ProductSection categories={categories} />
         </div>
-        <div className="py-2">
+        <div className="py-2 bg-semi-transparent">
           <PromotionBanner />
         </div>
-        <div className="py-2">
+        <div className="py-2 bg-transparent-light">
           <BusinessMap />
         </div>
       </main>
       
-      <Footer />
+      <div className="bg-transparent-glass">
+        <Footer />
+      </div>
       
       {/* Floating Cart with item count indicator */}
       <FloatingCart onClick={() => setIsCartOpen(true)} />
