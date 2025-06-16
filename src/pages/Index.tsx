@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { HeroSection } from '../components/HeroSection';
@@ -88,16 +89,16 @@ const Index = () => {
       <Header onMenuClick={() => setIsSidebarOpen(true)} />
       
       <main className="flex-grow">
-        <div className="bg-transparent-light">
+        <div className="bg-hero-glass">
           <HeroSection />
         </div>
         <div id="product-section" className="py-2 bg-transparent-glass">
           <ProductSection categories={categories} />
         </div>
-        <div className="py-2 bg-semi-transparent">
+        <div className="py-2 bg-transparent-light">
           <PromotionBanner />
         </div>
-        <div className="py-2 bg-transparent-light">
+        <div className="py-2 bg-semi-transparent">
           <BusinessMap />
         </div>
       </main>

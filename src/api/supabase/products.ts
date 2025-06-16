@@ -2,7 +2,6 @@
 import { supabase } from './client';
 import { logger } from '../../utils/logger';
 import { Product } from '../../types';
-import { SupabaseProduct, mapSupabaseProductToLocal } from '../../types/supabase';
 
 export const ProductsService = {
   // Obtener productos por negocio
@@ -20,7 +19,20 @@ export const ProductsService = {
         return [];
       }
 
-      return (data || []).map(mapSupabaseProductToLocal);
+      return (data || []).map((product: any) => ({
+        id: product.id,
+        name: product.nombre,
+        price: product.precio,
+        originalPrice: product.precio_original,
+        image: product.imagen_url || '/placeholder.svg',
+        categoryId: product.categoria_id || '',
+        category: product.categoria || '',
+        description: product.descripcion || '',
+        sku: product.sku || product.id,
+        discount: product.precio_original && product.precio_original > product.precio 
+          ? Math.round(((product.precio_original - product.precio) / product.precio_original) * 100)
+          : undefined
+      }));
     } catch (error) {
       logger.error('Error in getProductsByBusiness:', undefined, error as Error);
       return [];
@@ -43,7 +55,20 @@ export const ProductsService = {
         return [];
       }
 
-      return (data || []).map(mapSupabaseProductToLocal);
+      return (data || []).map((product: any) => ({
+        id: product.id,
+        name: product.nombre,
+        price: product.precio,
+        originalPrice: product.precio_original,
+        image: product.imagen_url || '/placeholder.svg',
+        categoryId: product.categoria_id || '',
+        category: product.categoria || '',
+        description: product.descripcion || '',
+        sku: product.sku || product.id,
+        discount: product.precio_original && product.precio_original > product.precio 
+          ? Math.round(((product.precio_original - product.precio) / product.precio_original) * 100)
+          : undefined
+      }));
     } catch (error) {
       logger.error('Error in getProductsByCategory:', undefined, error as Error);
       return [];
@@ -85,7 +110,20 @@ export const ProductsService = {
         return null;
       }
 
-      return mapSupabaseProductToLocal(data as SupabaseProduct);
+      return {
+        id: data.id,
+        name: data.nombre,
+        price: data.precio,
+        originalPrice: data.precio_original,
+        image: data.imagen_url || '/placeholder.svg',
+        categoryId: data.categoria_id || '',
+        category: data.categoria || '',
+        description: data.descripcion || '',
+        sku: data.sku || data.id,
+        discount: data.precio_original && data.precio_original > data.precio 
+          ? Math.round(((data.precio_original - data.precio) / data.precio_original) * 100)
+          : undefined
+      };
     } catch (error) {
       logger.error('Error in create product:', undefined, error as Error);
       return null;
@@ -117,7 +155,20 @@ export const ProductsService = {
         return null;
       }
 
-      return mapSupabaseProductToLocal(data as SupabaseProduct);
+      return {
+        id: data.id,
+        name: data.nombre,
+        price: data.precio,
+        originalPrice: data.precio_original,
+        image: data.imagen_url || '/placeholder.svg',
+        categoryId: data.categoria_id || '',
+        category: data.categoria || '',
+        description: data.descripcion || '',
+        sku: data.sku || data.id,
+        discount: data.precio_original && data.precio_original > data.precio 
+          ? Math.round(((data.precio_original - data.precio) / data.precio_original) * 100)
+          : undefined
+      };
     } catch (error) {
       logger.error('Error in update product:', undefined, error as Error);
       return null;
