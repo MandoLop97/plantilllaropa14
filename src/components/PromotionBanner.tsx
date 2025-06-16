@@ -71,15 +71,17 @@ export const PromotionBanner = () => {
   };
 
   return (
-    <section ref={bannerRef} className="py-8 bg-transparent">
+    <section ref={bannerRef} className="py-8 bg-gradient-to-br from-neutral-50 to-primary-50/20">
       <div className="container mx-auto px-4">
-        <motion.div
-          className="relative bg-transparent rounded-2xl overflow-hidden shadow-xl border border-primary-400/20"
-          variants={containerVariants}
-          initial="hidden"
+        <motion.div 
+          className="relative bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl overflow-hidden shadow-xl border border-primary-400/20" 
+          variants={containerVariants} 
+          initial="hidden" 
           animate={isVisible ? "visible" : "hidden"}
         >
-          {/* Subtle background decoration removed to keep transparency */}
+          {/* Subtle background decoration */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-transparent"></div>
+          
           <div className="relative z-10 p-6 md:p-8">
             <div className="grid lg:grid-cols-2 gap-8 items-center">
               {/* Left side - Promotion details */}
