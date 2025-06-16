@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCarouselScroll } from '../hooks/useCarouselScroll';
@@ -48,15 +47,21 @@ export const CategorySelector: React.FC<CategorySelectorProps> = ({
   };
 
   return (
-    <div className="relative mb-6">
+    <div 
+      className="relative mb-6 py-4 rounded-2xl"
+      style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e0f2fe' fill-opacity='0.4'%3E%3Cpath d='M50 50m-20 0a20,20 0 1,1 40,0a20,20 0 1,1 -40,0'/%3E%3Cpath d='M50 30m-10 0a10,10 0 1,1 20,0a10,10 0 1,1 -20,0'/%3E%3Cpath d='M50 70m-8 0a8,8 0 1,1 16,0a8,8 0 1,1 -16,0'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        backgroundColor: '#f8fafc'
+      }}
+    >
       {/* Contenedor principal optimizado para móviles */}
       <div className="w-full relative">
         {/* Fades laterales SOLO en mobile */}
         <div className="pointer-events-none absolute top-0 left-0 h-full w-4 z-20 block sm:hidden" style={{
-          background: 'linear-gradient(to right, #fff 60%, transparent 100%)'
+          background: 'linear-gradient(to right, #f8fafc 60%, transparent 100%)'
         }} />
         <div className="pointer-events-none absolute top-0 right-0 h-full w-4 z-20 block sm:hidden" style={{
-          background: 'linear-gradient(to left, #fff 60%, transparent 100%)'
+          background: 'linear-gradient(to left, #f8fafc 60%, transparent 100%)'
         }} />
 
         <div 
@@ -165,7 +170,6 @@ export const CategorySelector: React.FC<CategorySelectorProps> = ({
                           `} 
                         />
                       </motion.div>
-                    </motion.div>
                     
                     {/* Nombre de la categoría optimizado para móviles */}
                     <motion.span 

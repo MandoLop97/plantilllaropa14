@@ -18,8 +18,14 @@ export const BusinessMap = () => {
 
   if (businessConfig.loading) {
     return (
-      <section className="py-8 bg-neutral-50">
-        <div className="container mx-auto px-4">
+      <section 
+        className="py-8 relative"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fff3e0' fill-opacity='0.5'%3E%3Cpath d='M60 60m-25 0a25,25 0 1,1 50,0a25,25 0 1,1 -50,0'/%3E%3Cpath d='M60 45m-5 0a5,5 0 1,1 10,0a5,5 0 1,1 -10,0'/%3E%3Cpath d='M60 75m-3 0a3,3 0 1,1 6,0a3,3 0 1,1 -6,0'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundColor: '#fef7ed'
+        }}
+      >
+        <div className="container mx-auto px-4 relative z-10">
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden animate-pulse">
             <div className="h-80 bg-neutral-200"></div>
             <div className="p-6">
@@ -34,8 +40,14 @@ export const BusinessMap = () => {
   }
 
   return (
-    <section className="py-6 sm:py-8 lg:py-12 bg-gradient-to-br from-neutral-50 to-primary-50/20">
-      <div className="container mx-auto px-4">
+    <section 
+      className="py-6 sm:py-8 lg:py-12 relative"
+      style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fff3e0' fill-opacity='0.5'%3E%3Cpath d='M60 60m-25 0a25,25 0 1,1 50,0a25,25 0 1,1 -50,0'/%3E%3Cpath d='M60 45m-5 0a5,5 0 1,1 10,0a5,5 0 1,1 -10,0'/%3E%3Cpath d='M60 75m-3 0a3,3 0 1,1 6,0a3,3 0 1,1 -6,0'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        backgroundColor: '#fef7ed'
+      }}
+    >
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-6 sm:mb-8">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-900 mb-2 sm:mb-3">
             Nuestra Ubicación
