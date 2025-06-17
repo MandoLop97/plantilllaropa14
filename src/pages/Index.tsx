@@ -81,7 +81,7 @@ const Index = () => {
         </div>
       </div>;
   }
-  return <div className="min-h-screen paletas-pattern parallax-element flex flex-col mx-0 px-0">
+  return <div className="min-h-screen flex flex-col mx-0 px-0">
       <Header onMenuClick={() => setIsSidebarOpen(true)} />
       
       <main className="flex-grow my-0 px-0 mx-2 lg:mx-[30px]">
