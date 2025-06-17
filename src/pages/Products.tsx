@@ -89,7 +89,7 @@ const Products = () => {
         onCategorySelect={handleCategorySelect}
       />
 
-      <main className="flex-grow pb-16 py-2">
+      <main className="flex-grow pb-16 py-2 mx-0.5 lg:mx-[40px]">
         <div className={UI_CONFIG.CONTAINER_CLASSES}>
           <div className="bg-transparent-glass rounded-2xl p-4 mb-4">
             <BannerSlider />
