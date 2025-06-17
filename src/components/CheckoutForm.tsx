@@ -10,8 +10,8 @@ import { logger } from '../utils/logger';
 import { APP_CONFIG } from '../constants/app';
 
 interface CheckoutFormProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen?: boolean;
+  onClose?: () => void;
 }
 
 type CheckoutStep = 'cart' | 'customer' | 'success' | 'error';
@@ -27,7 +27,7 @@ interface CustomerData {
   pais: string;
 }
 
-export const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose }) => {
+export const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen = true, onClose }) => {
   const { items, total, clearCart } = useCart();
   const { businessId, subdomain, businessData } = useDynamicBusinessId();
   const [currentStep, setCurrentStep] = useState<CheckoutStep>('cart');
@@ -244,7 +244,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose }) =
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
     
     window.open(whatsappUrl, '_blank');
-    onClose();
+    if (onClose) onClose();
   };
 
   const handleBack = () => {
@@ -266,11 +266,218 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose }) =
     setCouponCode('');
     setCouponError('');
     setError(null);
-    onClose();
+    if (onClose) onClose();
   };
 
   if (!isOpen) return null;
 
+  // When used in dedicated page (onClose is undefined), render without modal wrapper
+  if (!onClose) {
+    return (
+      <div className="w-full max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Formulario de checkout */}
+          <div className="bg-transparent-light rounded-xl p-6">
+            {currentStep === 'cart' && (
+              <>
+                {/* Order Summary */}
+                <div>
+                  <h3 className="font-semibold text-neutral-900 mb-3">Resumen del pedido</h3>
+                  <div className="space-y-3">
+                    {items.map(item => (
+                      <div key={item.id} className="flex items-center space-x-3 bg-neutral-50 rounded-lg p-3">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-12 h-12 rounded-lg object-cover"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-medium text-neutral-900 truncate text-sm">{item.name}</h4>
+                          <p className="text-sm text-neutral-600">{formatPrice(item.price)} x {item.quantity}</p>
+                        </div>
+                        <div className="text-sm font-semibold text-neutral-900">
+                          {formatPrice(item.price * item.quantity)}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Coupon Section */}
+                <div className="border rounded-lg p-4 bg-neutral-50 mt-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Tag size={18} className="text-primary-500" />
+                    <h3 className="font-semibold text-neutral-900">Cupón de descuento</h3>
+                  </div>
+                  
+                  {!appliedCoupon ? (
+                    <div className="space-y-3">
+                      <div className="flex gap-2">
+                        <input
+                          type="text"
+                          value={couponCode}
+                          onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                          placeholder="Ingresa tu código"
+                          className="flex-1 px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
+                          onKeyPress={(e) => e.key === 'Enter' && handleApplyCoupon()}
+                        />
+                        <button
+                          onClick={handleApplyCoupon}
+                          className="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors text-sm font-medium"
+                        >
+                          Aplicar
+                        </button>
+                      </div>
+                      {couponError && (
+                        <p className="text-red-500 text-sm">{couponError}</p>
+                      )}
+                      <div className="text-xs text-neutral-500">
+                        <p>Cupones disponibles: DESCUENTO10, PRIMERA20, VERANO15</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="flex items-center justify-between bg-green-50 border border-green-200 rounded-lg p-3"
+                    >
+                      <div>
+                        <p className="font-medium text-green-800">{appliedCoupon}</p>
+                        <p className="text-sm text-green-600">-{discount}% de descuento aplicado</p>
+                      </div>
+                      <button
+                        onClick={handleRemoveCoupon}
+                        className="text-green-600 hover:text-green-800 transition-colors"
+                      >
+                        <X size={18} />
+                      </button>
+                    </motion.div>
+                  )}
+                </div>
+
+                <div className="mt-6">
+                  <button
+                    onClick={() => setCurrentStep('customer')}
+                    className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold py-3 rounded-xl hover:from-green-600 hover:to-green-700 transition-all duration-200 flex items-center justify-center space-x-2"
+                    disabled={items.length === 0}
+                  >
+                    <span>Continuar</span>
+                    <span>{formatPrice(finalTotal)}</span>
+                  </button>
+                </div>
+              </>
+            )}
+
+            {currentStep === 'customer' && (
+              <div>
+                <button
+                  onClick={handleBack}
+                  className="mb-4 flex items-center text-primary-600 hover:text-primary-800"
+                >
+                  <ArrowLeft size={18} className="mr-2" />
+                  Volver al carrito
+                </button>
+                <CustomerForm 
+                  onSubmit={handleCustomerSubmit}
+                  isLoading={isLoading}
+                />
+              </div>
+            )}
+
+            {currentStep === 'success' && (
+              <div className="text-center py-8">
+                <div className="w-16 h-16 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <span className="text-green-600 text-2xl">✓</span>
+                </div>
+                <h3 className="text-xl font-semibold text-neutral-900 mb-2">
+                  ¡Pedido confirmado!
+                </h3>
+                <p className="text-neutral-600 mb-2">
+                  Tu pedido #{orderNumber} ha sido creado exitosamente
+                </p>
+                {businessData && (
+                  <p className="text-sm text-neutral-500 mb-4">
+                    en {businessData.nombre}
+                  </p>
+                )}
+                <div className="text-lg font-bold text-primary-600 mb-6">
+                  Total: {formatPrice(orderTotal)}
+                </div>
+                <button
+                  onClick={handleWhatsAppCheckout}
+                  className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold py-3 rounded-xl hover:from-green-600 hover:to-green-700 transition-all duration-200 flex items-center justify-center space-x-2"
+                >
+                  <span>Enviar por WhatsApp</span>
+                </button>
+              </div>
+            )}
+
+            {currentStep === 'error' && (
+              <div className="text-center py-8">
+                <div className="w-16 h-16 bg-red-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <span className="text-red-600 text-2xl">✗</span>
+                </div>
+                <h3 className="text-xl font-semibold text-neutral-900 mb-2">
+                  Error en el pedido
+                </h3>
+                <p className="text-neutral-600 mb-4">
+                  {error || 'Ocurrió un error al procesar tu pedido'}
+                </p>
+                <button
+                  onClick={() => setCurrentStep('cart')}
+                  className="bg-primary-500 text-white px-6 py-2 rounded-lg hover:bg-primary-600 transition-colors"
+                >
+                  Intentar de nuevo
+                </button>
+              </div>
+            )}
+          </div>
+          
+          {/* Resumen del pedido */}
+          <div className="bg-semi-transparent rounded-xl p-6">
+            <h2 className="text-xl font-semibold text-primary-700 mb-4">
+              Resumen del Pedido
+            </h2>
+            
+            <div className="space-y-4">
+              {items.map((item) => (
+                <div key={item.id} className="flex justify-between items-center py-2 border-b border-primary-100">
+                  <div className="flex-1">
+                    <h3 className="font-medium text-primary-800">{item.name}</h3>
+                    <p className="text-sm text-primary-600">Cantidad: {item.quantity}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-semibold text-primary-800">
+                      ${(item.price * item.quantity).toFixed(2)}
+                    </p>
+                  </div>
+                </div>
+              ))}
+              
+              <div className="border-t border-primary-200 pt-4 mt-4">
+                {appliedCoupon && (
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm text-primary-600">Descuento ({discount}%):</span>
+                    <span className="text-sm font-semibold text-green-600">
+                      -${discountAmount.toFixed(2)}
+                    </span>
+                  </div>
+                )}
+                <div className="flex justify-between items-center">
+                  <span className="text-lg font-bold text-primary-800">Total:</span>
+                  <span className="text-xl font-bold text-secondary-600">
+                    ${finalTotal.toFixed(2)}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Modal version (when onClose is provided)
   return (
     <div className="fixed inset-0 z-50 flex">
       {/* Backdrop */}
