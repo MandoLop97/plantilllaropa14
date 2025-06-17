@@ -75,7 +75,7 @@ const Products = () => {
   if (!isPageLoaded) {
     return <ProductsPageSkeleton />;
   }
-  return <div className="min-h-screen ice-cream-pattern flex flex-col mx-0">
+  return <div className="min-h-screen ice-cream-pattern flex flex-col my-0 mx-0.5 lg:mx-[40px]">
       <Header onMenuClick={() => setIsSidebarOpen(true)} />
 
       <Sidebar categories={categories} isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} onCategorySelect={handleCategorySelect} />
