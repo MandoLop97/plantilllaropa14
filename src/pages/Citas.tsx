@@ -16,7 +16,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Calendar, Clock, User, CheckCircle, ArrowRight, Sparkles } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
-
 const Citas = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -24,20 +23,23 @@ const Citas = () => {
   const [fechaSeleccionada, setFechaSeleccionada] = useState<Date | undefined>(undefined);
   const [horaSeleccionada, setHoraSeleccionada] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState("servicios");
-  
+
   // Use dynamic business context
-  const { businessId, subdomain, isLoading: businessLoading } = useDynamicBusinessId();
-  
+  const {
+    businessId,
+    subdomain,
+    isLoading: businessLoading
+  } = useDynamicBusinessId();
+
   // Use dynamic page meta
   const businessConfig = useDynamicPageMeta();
-  
-  const { categories } = useSupabaseCategories(businessId || '');
+  const {
+    categories
+  } = useSupabaseCategories(businessId || '');
   const isMobile = useIsMobile();
-
   useEffect(() => {
     scrollToTop();
   }, []);
-
   useEffect(() => {
     // Log business configuration for debugging
     logger.info('🗓️ Citas page loaded with business config:', {
@@ -67,7 +69,6 @@ const Citas = () => {
       setActiveTab("calendario");
     }
   }, [servicioSeleccionado]);
-
   useEffect(() => {
     if (fechaSeleccionada && horaSeleccionada && activeTab === "calendario") {
       setActiveTab("datos");
@@ -76,26 +77,26 @@ const Citas = () => {
 
   // Show loading state while business is being loaded
   if (businessLoading || businessConfig.loading) {
-    return (
-      <div className="min-h-screen ice-cream-pattern flex flex-col">
+    return <div className="min-h-screen ice-cream-pattern flex flex-col">
         <div className="animate-pulse">
           <div className="h-16 bg-gray-200 mb-2"></div>
           <div className="h-80 bg-gray-200 mb-2"></div>
           <div className="h-48 bg-gray-200"></div>
         </div>
-      </div>
-    );
+      </div>;
   }
-
   const getTabIcon = (tab: string) => {
     switch (tab) {
-      case 'servicios': return <User className="w-4 h-4 sm:mr-2" />;
-      case 'calendario': return <Calendar className="w-4 h-4 sm:mr-2" />;
-      case 'datos': return <CheckCircle className="w-4 h-4 sm:mr-2" />;
-      default: return null;
+      case 'servicios':
+        return <User className="w-4 h-4 sm:mr-2" />;
+      case 'calendario':
+        return <Calendar className="w-4 h-4 sm:mr-2" />;
+      case 'datos':
+        return <CheckCircle className="w-4 h-4 sm:mr-2" />;
+      default:
+        return null;
     }
   };
-
   const getStepStatus = (step: string) => {
     switch (step) {
       case 'servicio':
@@ -108,13 +109,11 @@ const Citas = () => {
         return 'pending';
     }
   };
-
-  return (
-    <div className="min-h-screen ice-cream-pattern flex flex-col">
+  return <div className="min-h-screen ice-cream-pattern flex flex-col px-0">
       <Header onMenuClick={() => setIsSidebarOpen(true)} />
       
-      <main className="flex-grow py-2 sm:py-4 lg:py-6 mx-0.5 lg:mx-[40px]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="flex-grow py-2 sm:py-4 mx-0.5 lg:mx-[40px] lg:py-[16px]">
+        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 px-0">
           {/* Hero Section */}
           <div className="text-center mb-4 sm:mb-6 bg-transparent-light rounded-2xl p-6">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full text-blue-700 text-sm font-medium mb-2">
@@ -136,14 +135,8 @@ const Citas = () => {
               <div className="flex items-center space-x-2 sm:space-x-4 lg:space-x-6 overflow-x-auto pb-2">
                 {/* Paso 1: Servicio */}
                 <div className={`flex items-center ${getStepStatus('servicio') === 'completed' ? 'text-green-600' : getStepStatus('servicio') === 'active' ? 'text-blue-600' : 'text-gray-400'}`}>
-                  <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center mr-2 ${
-                    getStepStatus('servicio') === 'completed' ? 'bg-green-100' : 
-                    getStepStatus('servicio') === 'active' ? 'bg-blue-100' : 'bg-gray-100'
-                  }`}>
-                    {getStepStatus('servicio') === 'completed' ? 
-                      <CheckCircle className="w-4 h-4" /> : 
-                      <User className="w-4 h-4" />
-                    }
+                  <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center mr-2 ${getStepStatus('servicio') === 'completed' ? 'bg-green-100' : getStepStatus('servicio') === 'active' ? 'bg-blue-100' : 'bg-gray-100'}`}>
+                    {getStepStatus('servicio') === 'completed' ? <CheckCircle className="w-4 h-4" /> : <User className="w-4 h-4" />}
                   </div>
                   <span className="font-medium text-sm hidden sm:inline">Servicio</span>
                   <span className="font-medium text-xs sm:hidden">1</span>
@@ -154,14 +147,8 @@ const Citas = () => {
                 
                 {/* Paso 2: Fecha y Hora */}
                 <div className={`flex items-center ${getStepStatus('calendario') === 'completed' ? 'text-green-600' : getStepStatus('calendario') === 'active' ? 'text-blue-600' : 'text-gray-400'}`}>
-                  <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center mr-2 ${
-                    getStepStatus('calendario') === 'completed' ? 'bg-green-100' : 
-                    getStepStatus('calendario') === 'active' ? 'bg-blue-100' : 'bg-gray-100'
-                  }`}>
-                    {getStepStatus('calendario') === 'completed' ? 
-                      <CheckCircle className="w-4 h-4" /> : 
-                      <Calendar className="w-4 h-4" />
-                    }
+                  <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center mr-2 ${getStepStatus('calendario') === 'completed' ? 'bg-green-100' : getStepStatus('calendario') === 'active' ? 'bg-blue-100' : 'bg-gray-100'}`}>
+                    {getStepStatus('calendario') === 'completed' ? <CheckCircle className="w-4 h-4" /> : <Calendar className="w-4 h-4" />}
                   </div>
                   <span className="font-medium text-sm hidden sm:inline">Fecha y Hora</span>
                   <span className="font-medium text-xs sm:hidden">2</span>
@@ -172,9 +159,7 @@ const Citas = () => {
                 
                 {/* Paso 3: Confirmar */}
                 <div className={`flex items-center ${getStepStatus('datos') === 'active' ? 'text-blue-600' : 'text-gray-400'}`}>
-                  <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center mr-2 ${
-                    getStepStatus('datos') === 'active' ? 'bg-blue-100' : 'bg-gray-100'
-                  }`}>
+                  <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center mr-2 ${getStepStatus('datos') === 'active' ? 'bg-blue-100' : 'bg-gray-100'}`}>
                     <CheckCircle className="w-4 h-4" />
                   </div>
                   <span className="font-medium text-sm hidden sm:inline">Confirmar</span>
@@ -188,28 +173,17 @@ const Citas = () => {
           <div className="max-w-6xl mx-auto">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className={`grid w-full grid-cols-3 mb-4 bg-transparent-glass backdrop-blur-sm shadow-sm border ${isMobile ? 'h-10' : 'h-12'}`}>
-                <TabsTrigger 
-                  value="servicios" 
-                  className={`flex items-center justify-center ${isMobile ? 'text-xs px-1' : 'text-sm px-2'}`}
-                >
+                <TabsTrigger value="servicios" className={`flex items-center justify-center ${isMobile ? 'text-xs px-1' : 'text-sm px-2'}`}>
                   {getTabIcon('servicios')}
                   <span className="hidden sm:inline ml-1">1. Servicio</span>
                   <span className="sm:hidden">1</span>
                 </TabsTrigger>
-                <TabsTrigger 
-                  value="calendario" 
-                  disabled={!servicioSeleccionado}
-                  className={`flex items-center justify-center ${isMobile ? 'text-xs px-1' : 'text-sm px-2'}`}
-                >
+                <TabsTrigger value="calendario" disabled={!servicioSeleccionado} className={`flex items-center justify-center ${isMobile ? 'text-xs px-1' : 'text-sm px-2'}`}>
                   {getTabIcon('calendario')}
                   <span className="hidden sm:inline ml-1">2. Fecha</span>
                   <span className="sm:hidden">2</span>
                 </TabsTrigger>
-                <TabsTrigger 
-                  value="datos" 
-                  disabled={!servicioSeleccionado || !fechaSeleccionada || !horaSeleccionada}
-                  className={`flex items-center justify-center ${isMobile ? 'text-xs px-1' : 'text-sm px-2'}`}
-                >
+                <TabsTrigger value="datos" disabled={!servicioSeleccionado || !fechaSeleccionada || !horaSeleccionada} className={`flex items-center justify-center ${isMobile ? 'text-xs px-1' : 'text-sm px-2'}`}>
                   {getTabIcon('datos')}
                   <span className="hidden sm:inline ml-1">3. Datos</span>
                   <span className="sm:hidden">3</span>
@@ -228,30 +202,21 @@ const Citas = () => {
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="px-4 sm:px-6">
-                    <ServiciosSelector 
-                      businessId={businessId || ''}
-                      onServicioSelected={(servicio) => {
-                        setServicioSeleccionado(servicio);
-                      }}
-                      servicioSeleccionado={servicioSeleccionado}
-                    />
-                    {servicioSeleccionado && (
-                      <div className="mt-4 p-3 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl border border-green-200">
+                    <ServiciosSelector businessId={businessId || ''} onServicioSelected={servicio => {
+                    setServicioSeleccionado(servicio);
+                  }} servicioSeleccionado={servicioSeleccionado} />
+                    {servicioSeleccionado && <div className="mt-4 p-3 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl border border-green-200">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
                             <CheckCircle className="w-4 h-4 text-green-600 mr-2" />
                             <span className="text-green-700 font-medium text-sm">Servicio seleccionado</span>
                           </div>
-                          <button
-                            onClick={() => setActiveTab("calendario")}
-                            className="flex items-center gap-2 bg-blue-600 text-white px-3 py-1.5 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
-                          >
+                          <button onClick={() => setActiveTab("calendario")} className="flex items-center gap-2 bg-blue-600 text-white px-3 py-1.5 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
                             Continuar
                             <ArrowRight className="w-4 h-4" />
                           </button>
                         </div>
-                      </div>
-                    )}
+                      </div>}
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -268,42 +233,26 @@ const Citas = () => {
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="px-4 sm:px-6">
-                    <CitasCalendar 
-                      servicioId={servicioSeleccionado?.id}
-                      onDateSelected={(fecha) => setFechaSeleccionada(fecha)}
-                      onTimeSelected={(hora) => setHoraSeleccionada(hora)}
-                      fechaSeleccionada={fechaSeleccionada}
-                      horaSeleccionada={horaSeleccionada}
-                    />
-                    {fechaSeleccionada && horaSeleccionada && (
-                      <div className="mt-4 p-3 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl border border-green-200">
+                    <CitasCalendar servicioId={servicioSeleccionado?.id} onDateSelected={fecha => setFechaSeleccionada(fecha)} onTimeSelected={hora => setHoraSeleccionada(hora)} fechaSeleccionada={fechaSeleccionada} horaSeleccionada={horaSeleccionada} />
+                    {fechaSeleccionada && horaSeleccionada && <div className="mt-4 p-3 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl border border-green-200">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center">
                             <CheckCircle className="w-4 h-4 text-green-600 mr-2" />
                             <span className="text-green-700 font-medium text-sm">Fecha y hora seleccionadas</span>
                           </div>
-                          <button
-                            onClick={() => setActiveTab("datos")}
-                            className="flex items-center gap-2 bg-blue-600 text-white px-3 py-1.5 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
-                          >
+                          <button onClick={() => setActiveTab("datos")} className="flex items-center gap-2 bg-blue-600 text-white px-3 py-1.5 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
                             Continuar
                             <ArrowRight className="w-4 h-4" />
                           </button>
                         </div>
-                      </div>
-                    )}
+                      </div>}
                   </CardContent>
                 </Card>
               </TabsContent>
 
               <TabsContent value="datos" className="space-y-3">
                 <div className="bg-transparent-glass rounded-2xl p-4">
-                  <CitasForm 
-                    servicio={servicioSeleccionado}
-                    fecha={fechaSeleccionada}
-                    hora={horaSeleccionada}
-                    businessId={businessId || ''}
-                  />
+                  <CitasForm servicio={servicioSeleccionado} fecha={fechaSeleccionada} hora={horaSeleccionada} businessId={businessId || ''} />
                 </div>
               </TabsContent>
             </Tabs>
@@ -323,15 +272,8 @@ const Citas = () => {
       
       {/* Sidebar with overlay */}
       <div className="sidebar-container">
-        <Sidebar
-          categories={categories}
-          isOpen={isSidebarOpen}
-          onClose={() => setIsSidebarOpen(false)}
-          onCategorySelect={() => {}}
-        />
+        <Sidebar categories={categories} isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} onCategorySelect={() => {}} />
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Citas;
