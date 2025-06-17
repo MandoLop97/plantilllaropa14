@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
@@ -78,7 +77,7 @@ const Citas = () => {
   // Show loading state while business is being loaded
   if (businessLoading || businessConfig.loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex flex-col">
+      <div className="min-h-screen ice-cream-pattern flex flex-col">
         <div className="animate-pulse">
           <div className="h-16 bg-gray-200 mb-2"></div>
           <div className="h-80 bg-gray-200 mb-2"></div>
@@ -111,13 +110,13 @@ const Citas = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex flex-col">
+    <div className="min-h-screen ice-cream-pattern flex flex-col">
       <Header onMenuClick={() => setIsSidebarOpen(true)} />
       
       <main className="flex-grow py-2 sm:py-4 lg:py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Hero Section */}
-          <div className="text-center mb-4 sm:mb-6">
+          <div className="text-center mb-4 sm:mb-6 bg-transparent-light rounded-2xl p-6">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full text-blue-700 text-sm font-medium mb-2">
               <Sparkles className="w-4 h-4" />
               Reserva en línea
@@ -133,7 +132,7 @@ const Citas = () => {
 
           {/* Progress Indicator - Responsive */}
           <div className="mb-4 sm:mb-6">
-            <div className="flex justify-center">
+            <div className="flex justify-center bg-transparent-glass rounded-2xl p-4">
               <div className="flex items-center space-x-2 sm:space-x-4 lg:space-x-6 overflow-x-auto pb-2">
                 {/* Paso 1: Servicio */}
                 <div className={`flex items-center ${getStepStatus('servicio') === 'completed' ? 'text-green-600' : getStepStatus('servicio') === 'active' ? 'text-blue-600' : 'text-gray-400'}`}>
@@ -188,7 +187,7 @@ const Citas = () => {
           {/* Main Content */}
           <div className="max-w-6xl mx-auto">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className={`grid w-full grid-cols-3 mb-4 bg-white/80 backdrop-blur-sm shadow-sm border ${isMobile ? 'h-10' : 'h-12'}`}>
+              <TabsList className={`grid w-full grid-cols-3 mb-4 bg-transparent-glass backdrop-blur-sm shadow-sm border ${isMobile ? 'h-10' : 'h-12'}`}>
                 <TabsTrigger 
                   value="servicios" 
                   className={`flex items-center justify-center ${isMobile ? 'text-xs px-1' : 'text-sm px-2'}`}
@@ -218,7 +217,7 @@ const Citas = () => {
               </TabsList>
               
               <TabsContent value="servicios" className="space-y-3">
-                <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+                <Card className="border-0 shadow-xl bg-transparent-glass backdrop-blur-sm">
                   <CardHeader className="pb-3">
                     <CardTitle className="flex items-center text-lg sm:text-xl">
                       <User className="w-5 h-5 mr-2 text-blue-600" />
@@ -258,7 +257,7 @@ const Citas = () => {
               </TabsContent>
 
               <TabsContent value="calendario" className="space-y-3">
-                <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+                <Card className="border-0 shadow-xl bg-transparent-glass backdrop-blur-sm">
                   <CardHeader className="pb-3">
                     <CardTitle className="flex items-center text-lg sm:text-xl">
                       <Calendar className="w-5 h-5 mr-2 text-blue-600" />
@@ -298,19 +297,23 @@ const Citas = () => {
               </TabsContent>
 
               <TabsContent value="datos" className="space-y-3">
-                <CitasForm 
-                  servicio={servicioSeleccionado}
-                  fecha={fechaSeleccionada}
-                  hora={horaSeleccionada}
-                  businessId={businessId || ''}
-                />
+                <div className="bg-transparent-glass rounded-2xl p-4">
+                  <CitasForm 
+                    servicio={servicioSeleccionado}
+                    fecha={fechaSeleccionada}
+                    hora={horaSeleccionada}
+                    businessId={businessId || ''}
+                  />
+                </div>
               </TabsContent>
             </Tabs>
           </div>
         </div>
       </main>
       
-      <Footer />
+      <div className="bg-transparent-glass">
+        <Footer />
+      </div>
       
       {/* Floating Cart with item count indicator */}
       <FloatingCart onClick={() => setIsCartOpen(true)} />

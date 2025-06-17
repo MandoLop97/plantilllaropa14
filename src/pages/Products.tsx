@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
@@ -80,7 +79,7 @@ const Products = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen ice-cream-pattern flex flex-col">
       <Header onMenuClick={() => setIsSidebarOpen(true)} />
 
       <Sidebar
@@ -92,11 +91,13 @@ const Products = () => {
 
       <main className="flex-grow pb-16 py-2">
         <div className={UI_CONFIG.CONTAINER_CLASSES}>
-          <BannerSlider />
+          <div className="bg-transparent-glass rounded-2xl p-4 mb-4">
+            <BannerSlider />
+          </div>
 
           <motion.div 
             {...animationVariants.fadeIn} 
-            className="text-center mb-4"
+            className="text-center mb-4 bg-transparent-light rounded-2xl p-6"
           >
             <h1 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 mb-1 tracking-tight">
               Todos los Productos
@@ -109,7 +110,7 @@ const Products = () => {
           {/* Controles superiores */}
           <div className="mb-4">
             <div className="max-w-3xl mx-auto w-full">
-              <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-between sm:flex-nowrap bg-white/80 rounded-xl px-2 py-2 shadow-sm">
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-between sm:flex-nowrap bg-transparent-glass rounded-xl px-2 py-2 shadow-sm">
                 <div className="flex items-center gap-2 flex-wrap justify-center">
                   <span className="text-sm text-neutral-600">{filteredProducts.length} productos</span>
                   {filters.category && (
@@ -184,7 +185,7 @@ const Products = () => {
           <div className="flex flex-col lg:flex-row gap-4">
             {/* Sidebar escritorio */}
             <div className="hidden lg:block w-60 flex-shrink-0">
-              <div className="sticky top-24">
+              <div className="sticky top-24 bg-transparent-glass rounded-2xl p-4">
                 <ProductFilters
                   categories={categories}
                   filters={filters}
@@ -200,7 +201,7 @@ const Products = () => {
                 <motion.div
                   {...animationVariants.fadeIn}
                   transition={transitionConfig.smooth}
-                  className="lg:hidden w-full overflow-hidden"
+                  className="lg:hidden w-full overflow-hidden bg-transparent-glass rounded-2xl p-4"
                 >
                   <ProductFilters
                     categories={categories}
@@ -215,7 +216,7 @@ const Products = () => {
 
             {/* Lista de productos */}
             <div className="flex-1">
-              <div className="max-w-5xl mx-auto px-1 sm:px-2">
+              <div className="max-w-5xl mx-auto px-1 sm:px-2 bg-transparent-light rounded-2xl p-4">
                 <AnimatePresence mode="wait" initial={false}>
                   {viewMode === 'grid' ? (
                     <motion.div
@@ -249,7 +250,9 @@ const Products = () => {
         </div>
       </main>
 
-      <Footer />
+      <div className="bg-transparent-glass">
+        <Footer />
+      </div>
       <FloatingCart onClick={() => setIsCartOpen(true)} />
       <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
 
