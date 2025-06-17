@@ -99,7 +99,7 @@ const Index = () => {
         </div>
       </main>
       
-      <div className="bg-transparent-glass">
+      <div className="bg-transparent-glass py-0 my-0 mx-0 px-0">
         <Footer />
       </div>
       
