@@ -115,7 +115,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onC
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
-              className="modal-content bg-white w-full h-full rounded-none overflow-y-auto shadow-2xl"
+              className="modal-content bg-white rounded-3xl w-full max-w-lg h-fit max-h-[95vh] overflow-hidden shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative">
