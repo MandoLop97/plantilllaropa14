@@ -104,7 +104,7 @@ export const useDynamicBusinessConfig = () => {
               url: businessInfo.banner_url || DEFAULT_CONFIG.banner.url,
               alt: `Banner ${businessInfo.nombre || DEFAULT_CONFIG.name}`
             },
-            backgroundUrl: (businessInfo as any).background || DEFAULT_CONFIG.backgroundUrl, // Usar el campo background de la DB
+            backgroundUrl: (businessInfo as any).background || '', // No usar fondo por defecto si el negocio no tiene uno
             loading: false,
             error: null,
             isFromDynamicSubdomain: isFromSubdomain
