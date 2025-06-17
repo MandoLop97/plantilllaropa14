@@ -4,7 +4,7 @@ import { APP_CONFIG } from '../constants/app';
 
 export function useHeroAspectRatio() {
   // Inicializar con un valor por defecto seguro
-  const [ratio, setRatio] = useState<number>(16 / 9);
+  const [ratio, setRatio] = useState<number>(30 / 9);
 
   useEffect(() => {
     const calculateRatio = () => {
