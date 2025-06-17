@@ -1,4 +1,5 @@
 
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -33,10 +34,29 @@
   will-change: transform;
 }
 
-/* --- EFECTO PARALLAX MEJORADO PARA MÓVILES --- */
+/* --- NUEVO FONDO CON IMAGEN DE PALETAS Y EFECTO PARALLAX --- */
+.paletas-pattern {
+  background-image: 
+    /* Overlay para mejor legibilidad */
+    linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
+    /* Imagen principal de paletas */
+    url("https://i.pinimg.com/736x/a3/f3/78/a3f3785563d2f8b2c0bee59a2d8f1ab7.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  /* Efecto parallax para móviles */
+  background-attachment: scroll;
+  transform: translateZ(0);
+  will-change: transform;
+  /* Optimización para rendimiento */
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* --- EFECTO PARALLAX MEJORADO PARA TODOS LOS DISPOSITIVOS --- */
 @media (min-width: 768px) {
-  .ice-cream-pattern {
-    background-attachment: fixed, fixed;
+  .paletas-pattern {
+    background-attachment: fixed;
   }
 }
 
@@ -46,24 +66,6 @@
   backface-visibility: hidden;
   perspective: 1000px;
   will-change: transform;
-}
-
-/* --- PATRÓN DE FONDO DE PALETAS --- */
-.paletas-pattern {
-  background-image: url("https://i.pinimg.com/736x/a3/f3/78/a3f3785563d2f8b2c0bee59a2d8f1ab7.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  /* Optimización para móviles */
-  background-attachment: scroll;
-  transform: translateZ(0);
-  will-change: transform;
-}
-
-@media (min-width: 768px) {
-  .paletas-pattern {
-    background-attachment: fixed;
-  }
 }
 
 /* --- FONDOS TRANSPARENTES MEJORADOS --- */
@@ -126,7 +128,6 @@
 
 /* --- OPTIMIZACIÓN PARA RENDIMIENTO EN MÓVILES --- */
 @media (max-width: 767px) {
-  .ice-cream-pattern,
   .paletas-pattern {
     /* Reduce el blur en móviles para mejor rendimiento */
     backdrop-filter: blur(5px);
@@ -287,7 +288,8 @@
   }
 
   body {
-    @apply bg-background text-foreground ice-cream-pattern;
+    @apply bg-background text-foreground paletas-pattern;
     font-family: var(--font-primary);
   }
 }
+

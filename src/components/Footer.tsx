@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDynamicBusinessConfig } from '../hooks/useDynamicBusinessConfig';
@@ -7,7 +8,7 @@ export const Footer: React.FC = () => {
   if (businessConfig.loading) {
     return null;
   }
-  return <footer className="bg-gradient-to-b from-primary-50 to-primary-100 pt-12 pb-8 mt-16 border-t border-primary-50 py-[44px] my-[2px]">
+  return <footer className="bg-gradient-to-b from-primary-50 to-primary-100 pt-12 pb-8 mt-16 border-t border-primary-50 py-[44px]">
       <div className="max-w-3xl mx-auto px-4">
         <div className="text-center">
 

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
@@ -57,7 +56,7 @@ const Checkout = () => {
   }
 
   return (
-    <div className="min-h-screen ice-cream-pattern parallax-element flex flex-col">
+    <div className="min-h-screen paletas-pattern parallax-element flex flex-col">
       <Header onMenuClick={() => setIsSidebarOpen(true)} />
       
       <main className="flex-grow py-8 px-4 lg:px-8">
@@ -67,44 +66,7 @@ const Checkout = () => {
               Finalizar Compra
             </h1>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Formulario de checkout */}
-              <div className="bg-transparent-light rounded-xl p-6">
-                <CheckoutForm />
-              </div>
-              
-              {/* Resumen del pedido */}
-              <div className="bg-semi-transparent rounded-xl p-6">
-                <h2 className="text-xl font-semibold text-primary-700 mb-4">
-                  Resumen del Pedido
-                </h2>
-                
-                <div className="space-y-4">
-                  {items.map((item) => (
-                    <div key={item.id} className="flex justify-between items-center py-2 border-b border-primary-100">
-                      <div className="flex-1">
-                        <h3 className="font-medium text-primary-800">{item.name}</h3>
-                        <p className="text-sm text-primary-600">Cantidad: {item.quantity}</p>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-semibold text-primary-800">
-                          ${(item.price * item.quantity).toFixed(2)}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                  
-                  <div className="border-t border-primary-200 pt-4 mt-4">
-                    <div className="flex justify-between items-center">
-                      <span className="text-lg font-bold text-primary-800">Total:</span>
-                      <span className="text-xl font-bold text-secondary-600">
-                        ${total.toFixed(2)}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <CheckoutForm />
           </div>
         </div>
       </main>
