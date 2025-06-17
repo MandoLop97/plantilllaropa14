@@ -84,7 +84,7 @@ const Index = () => {
   return <div className="min-h-screen flex flex-col mx-0 px-0">
       <Header onMenuClick={() => setIsSidebarOpen(true)} />
       
-      <main className="flex-grow mx-0.5 lg:mx-[40px]">
+      <main className="flex-grow mx-0 lg:mx-[60px]">
         <div className="bg-hero-glass">
           <HeroSection />
         </div>
