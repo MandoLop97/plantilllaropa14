@@ -12,6 +12,7 @@ import Citas from './pages/Citas';
 import Checkout from './pages/Checkout';
 import NotFound from './pages/NotFound';
 import './App.css';
+import { useServiceWorkerUpdater } from './hooks/useServiceWorkerUpdater';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -44,6 +45,7 @@ function AppContent() {
 }
 
 function App() {
+  useServiceWorkerUpdater();
   return (
     <QueryClientProvider client={queryClient}>
       <DynamicBusinessIdProvider>
