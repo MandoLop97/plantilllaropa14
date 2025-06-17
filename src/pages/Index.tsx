@@ -81,14 +81,14 @@ const Index = () => {
         </div>
       </div>;
   }
-  return <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col mx-[21px]">
       <Header onMenuClick={() => setIsSidebarOpen(true)} />
       
-      <main className="flex-grow">
-        <div className="bg-hero-glass mx-12 lg:mx-[50px]">
+      <main className="flex-grow my-0 mx-0">
+        <div className="bg-hero-glass lg:mx-[50px] mx-0">
           <HeroSection />
         </div>
-        <div id="product-section" className="py-2 bg-transparent-glass mx-2 px-1 lg:px-[60px] lg:mx-[50px]">
+        <div id="product-section" className="py-2 bg-transparent-glass px-1 lg:px-[60px] lg:mx-[50px] mx-0">
           <ProductSection categories={categories} />
         </div>
         <div className="py-2 bg-transparent-light mx-2 px-0 lg:mx-[50px]">
