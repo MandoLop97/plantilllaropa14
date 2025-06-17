@@ -40,7 +40,8 @@ const DEFAULT_CONFIG = {
     url: 'https://yxrkezxytovaxlpjnbda.supabase.co/storage/v1/object/public/infonegocio/Banner/b73218d6-186e-4bc0-8956-4b3db300abb4/1748140454942.png',
     alt: 'Banner del negocio'
   },
-  backgroundUrl: 'https://f005.backblazeb2.com/file/gutixsite/Fondos/ChatGPT+Image+17+jun+2025%2C+15_04_49.png'
+  // No default background image so businesses without one fall back to color
+  backgroundUrl: ''
 };
 
 export const useDynamicBusinessConfig = () => {
@@ -104,7 +105,7 @@ export const useDynamicBusinessConfig = () => {
               url: businessInfo.banner_url || DEFAULT_CONFIG.banner.url,
               alt: `Banner ${businessInfo.nombre || DEFAULT_CONFIG.name}`
             },
-            backgroundUrl: (businessInfo as any).background || DEFAULT_CONFIG.backgroundUrl, // Usar el campo background de la DB
+            backgroundUrl: (businessInfo as any).background || '', // Usar el campo background o caer al color
             loading: false,
             error: null,
             isFromDynamicSubdomain: isFromSubdomain

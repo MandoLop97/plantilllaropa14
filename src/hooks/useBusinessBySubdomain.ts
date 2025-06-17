@@ -10,6 +10,7 @@ export interface BusinessBySubdomain {
   direccion: string | null;
   logo_url: string | null;
   banner_url: string | null;
+  background: string | null;
   telefono: string | null;
   subdominio: string | null;
 }
@@ -29,7 +30,7 @@ export const useBusinessBySubdomain = (subdominio: string | undefined) => {
       try {
         const { data, error } = await supabase
           .from('negocios')
-          .select('id, nombre, descripcion, direccion, logo_url, banner_url, telefono, subdominio')
+          .select('id, nombre, descripcion, direccion, logo_url, banner_url, background, telefono, subdominio')
           .eq('subdominio', cleanSubdomain)
           .maybeSingle();
 

@@ -36,7 +36,7 @@ export const useDynamicPageMeta = () => {
       const title = `${businessConfig.name}: ${businessConfig.description}`;
       document.title = title;
       
-      // Get primary color for theme
+      // Get primary colors from theme
       let primaryColor = '#000000';
       const color500 =
         themeConfig?.colors?.customPalette?.primary?.['500'] ||
@@ -48,16 +48,34 @@ export const useDynamicPageMeta = () => {
         document.documentElement.style.setProperty('--background', bgVal);
       }
 
+      const color400 =
+        themeConfig?.colors?.customPalette?.primary?.['400'] ||
+        themeConfig?.colors?.light?.['primary-400'];
+
+      if (color400) {
+        const col = normalizeColor(color400).replace(/hsl\(|\)/g, '').trim();
+        document.documentElement.style.setProperty(
+          '--dynamic-background-color',
+          col
+        );
+      }
+
       // Apply dynamic background from business config
-      const backgroundUrl = businessConfig.banner?.url || businessConfig.logo?.url;
+      const backgroundUrl = businessConfig.backgroundUrl;
       if (backgroundUrl) {
         // Set CSS custom property for dynamic background
-        document.documentElement.style.setProperty('--dynamic-background-image', `url("${backgroundUrl}")`);
+        document.documentElement.style.setProperty(
+          '--dynamic-background-image',
+          `url("${backgroundUrl}")`
+        );
         logger.info('🎨 Dynamic background applied:', { backgroundUrl });
       } else {
         // Remove custom property if no background URL
-        document.documentElement.style.removeProperty('--dynamic-background-image');
-        logger.debug('🎨 No dynamic background URL found, using default');
+        document.documentElement.style.setProperty(
+          '--dynamic-background-image',
+          'none'
+        );
+        logger.debug('🎨 No dynamic background URL found, using color');
       }
       
       // Update favicon dynamically with comprehensive mobile support
