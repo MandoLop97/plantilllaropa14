@@ -128,7 +128,7 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
       </section>;
   }
   return <section className="py-0">
-      <div className="">
+      <div className="py-0 lg:py-[20px] px-0 lg:px-[50px]">
         {/* Category Selector */}
         <CategorySelector categories={categories} selectedCategory={selectedCategory} onCategorySelect={handleCategorySelect} />
 
