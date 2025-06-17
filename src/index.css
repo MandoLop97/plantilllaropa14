@@ -27,7 +27,25 @@
     );
   background-size: 80px 80px, 100% 100%;
   background-repeat: repeat, no-repeat;
-  background-attachment: fixed, fixed;
+  /* Efecto parallax optimizado para móviles */
+  background-attachment: scroll, scroll;
+  transform: translateZ(0); /* Hardware acceleration */
+  will-change: transform;
+}
+
+/* --- EFECTO PARALLAX MEJORADO PARA MÓVILES --- */
+@media (min-width: 768px) {
+  .ice-cream-pattern {
+    background-attachment: fixed, fixed;
+  }
+}
+
+/* Parallax específico para elementos con animación suave */
+.parallax-element {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform;
 }
 
 /* --- PATRÓN DE FONDO DE PALETAS --- */
@@ -36,7 +54,16 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-attachment: fixed;
+  /* Optimización para móviles */
+  background-attachment: scroll;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+@media (min-width: 768px) {
+  .paletas-pattern {
+    background-attachment: fixed;
+  }
 }
 
 /* --- FONDOS TRANSPARENTES MEJORADOS --- */
@@ -81,6 +108,36 @@
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+/* --- ANIMACIONES PARALLAX SUAVES --- */
+@keyframes parallax-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.parallax-float {
+  animation: parallax-float 6s ease-in-out infinite;
+}
+
+/* --- OPTIMIZACIÓN PARA RENDIMIENTO EN MÓVILES --- */
+@media (max-width: 767px) {
+  .ice-cream-pattern,
+  .paletas-pattern {
+    /* Reduce el blur en móviles para mejor rendimiento */
+    backdrop-filter: blur(5px);
+  }
+  
+  .bg-transparent-glass,
+  .bg-transparent-light,
+  .bg-semi-transparent,
+  .bg-hero-glass {
+    backdrop-filter: blur(8px);
+  }
 }
 
 @layer base {
@@ -202,7 +259,7 @@
     --secondary-foreground: 210 40% 98%;
 
     --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted-foreground: 215.20.2% 65.1%;
 
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
@@ -230,7 +287,7 @@
   }
 
   body {
-    @apply bg-background text-foreground paletas-pattern;
+    @apply bg-background text-foreground ice-cream-pattern;
     font-family: var(--font-primary);
   }
 }

@@ -23,15 +23,13 @@ export const ProductsService = {
         id: product.id,
         name: product.nombre,
         price: product.precio,
-        originalPrice: product.precio_original || undefined,
+        originalPrice: undefined, // Campo no existe en BD
         image: product.imagen_url || '/placeholder.svg',
-        categoryId: product.categoria_id || '',
+        categoryId: product.categoria || '', // Usar categoria en lugar de categoria_id
         category: product.categoria || '',
         description: product.descripcion || '',
-        sku: product.sku || product.id,
-        discount: product.precio_original && product.precio_original > product.precio 
-          ? Math.round(((product.precio_original - product.precio) / product.precio_original) * 100)
-          : undefined
+        sku: product.id, // Usar id como sku ya que no existe campo sku
+        discount: undefined // No calcular descuento sin precio_original
       }));
     } catch (error) {
       logger.error('Error in getProductsByBusiness:', undefined, error as Error);
@@ -46,7 +44,7 @@ export const ProductsService = {
         .from('productos')
         .select('*')
         .eq('negocio_id', businessId)
-        .eq('categoria_id', categoryId)
+        .eq('categoria', categoryId) // Usar categoria en lugar de categoria_id
         .eq('disponible', true)
         .order('nombre');
 
@@ -59,15 +57,13 @@ export const ProductsService = {
         id: product.id,
         name: product.nombre,
         price: product.precio,
-        originalPrice: product.precio_original || undefined,
+        originalPrice: undefined,
         image: product.imagen_url || '/placeholder.svg',
-        categoryId: product.categoria_id || '',
+        categoryId: product.categoria || '',
         category: product.categoria || '',
         description: product.descripcion || '',
-        sku: product.sku || product.id,
-        discount: product.precio_original && product.precio_original > product.precio 
-          ? Math.round(((product.precio_original - product.precio) / product.precio_original) * 100)
-          : undefined
+        sku: product.id,
+        discount: undefined
       }));
     } catch (error) {
       logger.error('Error in getProductsByCategory:', undefined, error as Error);
@@ -89,12 +85,9 @@ export const ProductsService = {
       const supabaseData = {
         nombre: productData.name || '',
         precio: productData.price || 0,
-        precio_original: productData.originalPrice,
         imagen_url: productData.image,
-        categoria_id: productData.categoryId,
         categoria: productData.category,
         descripcion: productData.description,
-        sku: productData.sku,
         negocio_id: negocio_id,
         disponible: true
       };
@@ -114,15 +107,13 @@ export const ProductsService = {
         id: data.id,
         name: data.nombre,
         price: data.precio,
-        originalPrice: data.precio_original,
+        originalPrice: undefined,
         image: data.imagen_url || '/placeholder.svg',
-        categoryId: data.categoria_id || '',
+        categoryId: data.categoria || '',
         category: data.categoria || '',
         description: data.descripcion || '',
-        sku: data.sku || data.id,
-        discount: data.precio_original && data.precio_original > data.precio 
-          ? Math.round(((data.precio_original - data.precio) / data.precio_original) * 100)
-          : undefined
+        sku: data.id,
+        discount: undefined
       };
     } catch (error) {
       logger.error('Error in create product:', undefined, error as Error);
@@ -136,12 +127,9 @@ export const ProductsService = {
       
       if (productData.name) updateData.nombre = productData.name;
       if (productData.price !== undefined) updateData.precio = productData.price;
-      if (productData.originalPrice !== undefined) updateData.precio_original = productData.originalPrice;
       if (productData.image) updateData.imagen_url = productData.image;
-      if (productData.categoryId) updateData.categoria_id = productData.categoryId;
       if (productData.category) updateData.categoria = productData.category;
       if (productData.description) updateData.descripcion = productData.description;
-      if (productData.sku) updateData.sku = productData.sku;
 
       const { data, error } = await supabase
         .from('productos')
@@ -159,15 +147,13 @@ export const ProductsService = {
         id: data.id,
         name: data.nombre,
         price: data.precio,
-        originalPrice: data.precio_original,
+        originalPrice: undefined,
         image: data.imagen_url || '/placeholder.svg',
-        categoryId: data.categoria_id || '',
+        categoryId: data.categoria || '',
         category: data.categoria || '',
         description: data.descripcion || '',
-        sku: data.sku || data.id,
-        discount: data.precio_original && data.precio_original > data.precio 
-          ? Math.round(((data.precio_original - data.precio) / data.precio_original) * 100)
-          : undefined
+        sku: data.id,
+        discount: undefined
       };
     } catch (error) {
       logger.error('Error in update product:', undefined, error as Error);
