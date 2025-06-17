@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useDynamicBusinessConfig } from '../hooks/useDynamicBusinessConfig';
@@ -15,6 +15,9 @@ export const HeroSection = () => {
   const businessConfig = useDynamicBusinessConfig();
   const ratio = useHeroAspectRatio();
   const { config: themeConfig, isLoading: themeLoading } = useThemeConfigData();
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: heroRef });
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]); 
 
   useEffect(() => {
     if (businessConfig.loading) return;
@@ -54,14 +57,14 @@ export const HeroSection = () => {
   }
 
   return (
-    <section className="relative mb-8 py-0">
+    <section ref={heroRef} className="relative mb-8 py-0">
       {/* Banner principal con imagen dinámica */}
       <div className="w-full max-w-7xl mx-auto overflow-hidden relative rounded-b-3xl shadow-xl">
         <AspectRatio ratio={ratio} className="bg-gradient-to-br from-primary-100 to-primary-200 rounded-b-3xl">
           <div className="relative w-full h-full overflow-hidden rounded-b-3xl" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-            <motion.div 
-              role="img" 
-              aria-label={businessConfig.banner.alt} 
+            <motion.div
+              role="img"
+              aria-label={businessConfig.banner.alt}
               initial={{
                 opacity: 0,
                 scale: 1.1
@@ -73,10 +76,12 @@ export const HeroSection = () => {
               transition={{
                 duration: 0.8
               }} 
-              className="absolute inset-0 bg-cover bg-center rounded-b-3xl" 
+              className="absolute inset-0 bg-cover bg-center rounded-b-3xl"
               style={{
                 backgroundImage: `url('${businessConfig.banner.url}')`,
-                transformOrigin: 'center'
+                transformOrigin: 'center',
+                imageRendering: 'auto',
+                y
               }}
             >
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none rounded-b-3xl" />
