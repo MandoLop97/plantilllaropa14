@@ -277,7 +277,7 @@ export const CategorySelector: React.FC<CategorySelectorProps> = ({
                         <motion.div
                           className={`absolute inset-0 transition-all duration-500
                             ${isSelected
-                              ? 'bg-gradient-to-br from-primary-500/35 via-primary-400/28 to-transparent'
+                              ? 'bg-gradient-to-br from-primary-500/55 via-primary-400/48 to-transparent'
                               : 'bg-black/3 group-hover:bg-gradient-to-br group-hover:from-primary-500/30 group-hover:via-primary-400/25 group-hover:to-transparent'
                             }
                           `}
