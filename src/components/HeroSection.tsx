@@ -54,7 +54,7 @@ export const HeroSection = () => {
         </div>
       </section>;
   }
-  return <section ref={heroRef} className="relative mb-8 py-0 mx-[20px]">
+  return <section ref={heroRef} className="relative mb-8 py-0 mx-0">
       {/* Banner principal con imagen dinámica */}
       <div className="w-full max-w-7xl mx-auto overflow-hidden relative rounded-b-3xl shadow-xl">
         <AspectRatio ratio={ratio} className="bg-gradient-to-br from-primary-100 to-primary-200 rounded-b-3xl">
