@@ -14,20 +14,28 @@
 
 /* --- PATRÓN DE FONDO ELEGANTE DE HELADOS --- */
 .ice-cream-pattern {
-  background-image: 
+  position: relative;
+}
+
+.ice-cream-pattern::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
     /* Patrón principal de helados */
     url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f8fafc' fill-opacity='0.08'%3E%3Ccircle cx='40' cy='25' r='6'/%3E%3Ccircle cx='25' cy='45' r='4'/%3E%3Ccircle cx='55' cy='45' r='4'/%3E%3C/g%3E%3Cg fill='%23e2e8f0' fill-opacity='0.05'%3E%3Ccircle cx='15' cy='15' r='3'/%3E%3Ccircle cx='65' cy='15' r='3'/%3E%3Ccircle cx='15' cy='65' r='3'/%3E%3Ccircle cx='65' cy='65' r='3'/%3E%3C/g%3E%3Cg fill='%23cbd5e1' fill-opacity='0.03'%3E%3Ccircle cx='10' cy='40' r='2'/%3E%3Ccircle cx='70' cy='40' r='2'/%3E%3Ccircle cx='40' cy='10' r='2'/%3E%3Ccircle cx='40' cy='70' r='2'/%3E%3C/g%3E%3C/svg%3E"),
     /* Gradiente base */
-    linear-gradient(135deg, 
-      rgba(248, 250, 252, 0.4) 0%, 
-      rgba(241, 245, 249, 0.3) 25%, 
-      rgba(248, 250, 252, 0.4) 50%, 
-      rgba(241, 245, 249, 0.3) 75%, 
+    linear-gradient(135deg,
+      rgba(248, 250, 252, 0.4) 0%,
+      rgba(241, 245, 249, 0.3) 25%,
+      rgba(248, 250, 252, 0.4) 50%,
+      rgba(241, 245, 249, 0.3) 75%,
       rgba(248, 250, 252, 0.4) 100%
     );
   background-size: 80px 80px, 100% 100%;
   background-repeat: repeat, no-repeat;
-  background-attachment: fixed, fixed;
 }
 
 /* --- PATRÓN DE FONDO DE PALETAS --- */
@@ -36,7 +44,6 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-attachment: fixed;
 }
 
 /* --- FONDOS TRANSPARENTES MEJORADOS --- */
@@ -230,7 +237,16 @@
   }
 
   body {
-    @apply bg-background text-foreground paletas-pattern;
+    @apply bg-background text-foreground;
     font-family: var(--font-primary);
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    @apply paletas-pattern;
   }
 }
