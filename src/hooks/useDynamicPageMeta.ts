@@ -61,10 +61,7 @@ export const useDynamicPageMeta = () => {
       }
 
       // Apply dynamic background from business config
-      const backgroundUrl =
-        businessConfig.backgroundUrl ||
-        businessConfig.banner?.url ||
-        businessConfig.logo?.url;
+      const backgroundUrl = businessConfig.backgroundUrl;
       if (backgroundUrl) {
         // Set CSS custom property for dynamic background
         document.documentElement.style.setProperty(
