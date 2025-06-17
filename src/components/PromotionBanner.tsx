@@ -1,11 +1,11 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, Gift, Tag, Timer } from 'lucide-react';
 import { usePromotionBanner } from '../hooks/usePromotionBanner';
-
 export const PromotionBanner = () => {
-  const { data: bannerData } = usePromotionBanner();
+  const {
+    data: bannerData
+  } = usePromotionBanner();
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -37,7 +37,6 @@ export const PromotionBanner = () => {
   // Countdown timer logic
   useEffect(() => {
     const endDate = new Date(bannerData.expiresAt);
-
     const timer = setInterval(() => {
       const currentTime = new Date().getTime();
       const distance = endDate.getTime() - currentTime;
@@ -50,35 +49,46 @@ export const PromotionBanner = () => {
         });
       } else {
         clearInterval(timer);
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        setTimeLeft({
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0
+        });
       }
     }, 1000);
     return () => clearInterval(timer);
   }, [bannerData.expiresAt]);
-
   const containerVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: {
+      opacity: 0,
+      y: 30
+    },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, staggerChildren: 0.1 }
+      transition: {
+        duration: 0.6,
+        staggerChildren: 0.1
+      }
     }
   };
-
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+    hidden: {
+      opacity: 0,
+      y: 20
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4
+      }
+    }
   };
-
-  return (
-    <section ref={bannerRef} className="py-8 bg-gradient-to-br from-neutral-50 to-primary-50/20">
+  return <section ref={bannerRef} className="bg-gradient-to-br from-neutral-50 to-primary-50/20 py-[35px]">
       <div className="container mx-auto px-4">
-        <motion.div 
-          className="relative bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl overflow-hidden shadow-xl border border-primary-400/20" 
-          variants={containerVariants} 
-          initial="hidden" 
-          animate={isVisible ? "visible" : "hidden"}
-        >
+        <motion.div className="relative bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl overflow-hidden shadow-xl border border-primary-400/20" variants={containerVariants} initial="hidden" animate={isVisible ? "visible" : "hidden"}>
           {/* Subtle background decoration */}
           <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-transparent"></div>
           
@@ -106,11 +116,11 @@ export const PromotionBanner = () => {
                   </div>
                 </div>
                 
-                <motion.button 
-                  whileHover={{ scale: 1.02 }} 
-                  whileTap={{ scale: 0.98 }} 
-                  className="bg-white text-primary-700 font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 inline-flex items-center gap-2"
-                >
+                <motion.button whileHover={{
+                scale: 1.02
+              }} whileTap={{
+                scale: 0.98
+              }} className="bg-white text-primary-700 font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 inline-flex items-center gap-2">
                   <span>{bannerData.buttonText}</span>
                   <Sparkles size={16} />
                 </motion.button>
@@ -124,17 +134,21 @@ export const PromotionBanner = () => {
                 </div>
                 
                 <div className="grid grid-cols-4 gap-3 max-w-xs mx-auto">
-                  {[
-                    { label: 'DÍAS', value: timeLeft.days.toString().padStart(2, '0') },
-                    { label: 'HRS', value: timeLeft.hours.toString().padStart(2, '0') },
-                    { label: 'MIN', value: timeLeft.minutes.toString().padStart(2, '0') },
-                    { label: 'SEG', value: timeLeft.seconds.toString().padStart(2, '0') }
-                  ].map((item, index) => (
-                    <motion.div 
-                      key={index} 
-                      className="text-center"
-                      whileHover={{ scale: 1.05 }}
-                    >
+                  {[{
+                  label: 'DÍAS',
+                  value: timeLeft.days.toString().padStart(2, '0')
+                }, {
+                  label: 'HRS',
+                  value: timeLeft.hours.toString().padStart(2, '0')
+                }, {
+                  label: 'MIN',
+                  value: timeLeft.minutes.toString().padStart(2, '0')
+                }, {
+                  label: 'SEG',
+                  value: timeLeft.seconds.toString().padStart(2, '0')
+                }].map((item, index) => <motion.div key={index} className="text-center" whileHover={{
+                  scale: 1.05
+                }}>
                       <div className="bg-white/25 backdrop-blur-md rounded-xl py-3 px-2 mb-2 shadow-lg border border-white/20">
                         <span className="text-2xl md:text-3xl font-bold text-white block">
                           {item.value}
@@ -143,14 +157,12 @@ export const PromotionBanner = () => {
                       <span className="text-xs font-semibold text-primary-200 uppercase tracking-wide">
                         {item.label}
                       </span>
-                    </motion.div>
-                  ))}
+                    </motion.div>)}
                 </div>
               </motion.div>
             </div>
           </div>
         </motion.div>
       </div>
-    </section>
-  );
+    </section>;
 };
