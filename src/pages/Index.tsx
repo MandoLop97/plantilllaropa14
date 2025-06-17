@@ -88,7 +88,7 @@ const Index = () => {
         <div className="bg-hero-glass">
           <HeroSection />
         </div>
-        <div id="product-section" className="py-2 bg-transparent-glass">
+        <div id="product-section" className="py-2 bg-transparent-glass mx-0 px-2 lg:px-0px">
           <ProductSection categories={categories} />
         </div>
         <div className="bg-transparent-light py-0 px-0">
