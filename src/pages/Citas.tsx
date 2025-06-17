@@ -113,7 +113,7 @@ const Citas = () => {
     <div className="min-h-screen ice-cream-pattern flex flex-col">
       <Header onMenuClick={() => setIsSidebarOpen(true)} />
       
-      <main className="flex-grow py-2 sm:py-4 lg:py-6">
+      <main className="flex-grow py-2 sm:py-4 lg:py-6 mx-0.5 lg:mx-[40px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Hero Section */}
           <div className="text-center mb-4 sm:mb-6 bg-transparent-light rounded-2xl p-6">
