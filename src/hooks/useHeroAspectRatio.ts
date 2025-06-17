@@ -9,7 +9,7 @@ export function useHeroAspectRatio() {
   useEffect(() => {
     const calculateRatio = () => {
       if (typeof window !== 'undefined') {
-        return window.innerWidth < APP_CONFIG.MOBILE_BREAKPOINT ?  16 / 9 : 20 / 5;
+        return window.innerWidth < APP_CONFIG.MOBILE_BREAKPOINT ?  16 / 9 : 30 / 9;
       }
       return 16 / 9; // Valor por defecto para SSR
     };
