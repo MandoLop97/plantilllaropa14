@@ -94,7 +94,7 @@ const Index = () => {
         <div className="py-2 bg-transparent-light mx-2 px-0 lg:mx-[50px]">
           <PromotionBanner />
         </div>
-        <div className="py-2 bg-semi-transparent lg:mx-[70px] mx-[50px]">
+        <div className="bg-semi-transparent lg:mx-[70px] mx-[50px] py-0">
           <BusinessMap />
         </div>
       </main>
