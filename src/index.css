@@ -40,7 +40,8 @@
 
 /* --- PATRÓN DE FONDO DE PALETAS --- */
 .paletas-pattern {
-  background-image: var(--dynamic-background-image, url("https://f005.backblazeb2.com/file/gutixsite/Fondos/ChatGPT+Image+17+jun+2025%2C+15_04_49.png"));
+  background-color: var(--dynamic-background-color, var(--color-primary-400));
+  background-image: var(--dynamic-background-image, none);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -130,6 +131,7 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    --dynamic-background-color: var(--color-primary-400);
 
     /* Variables de tema personalizadas - Colores primarios */
     --color-primary: 215 16% 47%;
@@ -228,6 +230,7 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    --dynamic-background-color: var(--color-primary-400);
   }
 }
 
