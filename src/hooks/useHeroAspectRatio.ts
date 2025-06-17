@@ -4,12 +4,12 @@ import { APP_CONFIG } from '../constants/app';
 
 export function useHeroAspectRatio() {
   // Inicializar con un valor por defecto seguro
-  const [ratio, setRatio] = useState<number>(26 / 9);
+  const [ratio, setRatio] = useState<number>(16 / 9);
 
   useEffect(() => {
     const calculateRatio = () => {
       if (typeof window !== 'undefined') {
-        return window.innerWidth < APP_CONFIG.MOBILE_BREAKPOINT ? 20 / 9 : 20 / 9;
+        return window.innerWidth < APP_CONFIG.MOBILE_BREAKPOINT ? 16 / 9 : 16 / 9;
       }
       return 16 / 9; // Valor por defecto para SSR
     };
