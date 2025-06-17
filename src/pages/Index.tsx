@@ -85,7 +85,7 @@ const Index = () => {
       <Header onMenuClick={() => setIsSidebarOpen(true)} />
       
       <main className="flex-grow">
-        <div className="bg-hero-glass mx-0 lg:mx-[50px]\n">
+        <div className="bg-hero-glass mx-12 lg:mx-[50px]">
           <HeroSection />
         </div>
         <div id="product-section" className="py-2 bg-transparent-glass mx-2 px-1 lg:px-[60px] lg:mx-[50px]">
