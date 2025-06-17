@@ -80,7 +80,7 @@ const Products = () => {
 
       <Sidebar categories={categories} isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} onCategorySelect={handleCategorySelect} />
 
-      <main className="flex-grow pb-16 py-1 lg:mx-[40px] mx-[2px]">
+      <main className="flex-grow pb-16 py-1">
         <div className="">
           <div className="bg-transparent-glass rounded-2xl p-4 mb-4">
             <BannerSlider />
