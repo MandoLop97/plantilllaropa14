@@ -88,13 +88,13 @@ const Index = () => {
         <div className="bg-hero-glass">
           <HeroSection />
         </div>
-        <div id="product-section" className="py-2 bg-transparent-glass mx-2 px-1 lg:px-[60px] lg:mx-[50px]">
+        <div id="product-section" className="py-2 bg-transparent-glass mx-2 px-1 lg:mx-[70px] lg:px-[60px]">
           <ProductSection categories={categories} />
         </div>
-        <div className="py-2 bg-transparent-light mx-2 px-0 lg:mx-[50px]">
+        <div className="py-2 bg-transparent-light mx-2 lg:mx-[70px] px-0">
           <PromotionBanner />
         </div>
-        <div className="py-2 bg-semi-transparent lg:mx-[70px] mx-[50px]">
+        <div className="py-2 bg-semi-transparent mx-2 lg:mx-[70px]">
           <BusinessMap />
         </div>
       </main>
