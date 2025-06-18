@@ -5,12 +5,24 @@ import { BUSINESS_ID } from '../config/business';
 import { applyThemeFromJson, DEFAULT_THEME, applyTheme } from '../config/theme';
 import { logger } from '../utils/logger';
 
-export const useTemaConfig = (businessId: string = BUSINESS_ID) => {
+export interface UseTemaConfigOptions {
+  enabled?: boolean;
+}
+
+export const useTemaConfig = (
+  businessId: string = BUSINESS_ID,
+  options: UseTemaConfigOptions = {}
+) => {
+  const { enabled = true } = options;
   const [config, setConfig] = useState<ThemeConfigJson | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!enabled) {
+      return;
+    }
+
     const load = async () => {
       try {
         setIsLoading(true);
@@ -42,7 +54,7 @@ export const useTemaConfig = (businessId: string = BUSINESS_ID) => {
     };
 
     load();
-  }, [businessId]);
+  }, [businessId, enabled]);
 
   return { config, isLoading, error };
 };

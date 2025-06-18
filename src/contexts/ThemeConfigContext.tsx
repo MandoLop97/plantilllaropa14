@@ -33,7 +33,9 @@ export const ThemeConfigProvider: React.FC<ProviderProps> = ({
   // Usar el businessId dinámico si está disponible, sino usar el prop o el BUSINESS_ID por defecto
   const finalBusinessId = businessId || dynamicBusinessId || BUSINESS_ID;
   
-  const { config, isLoading: themeLoading, error } = useTemaConfig(finalBusinessId);
+  const { config, isLoading: themeLoading, error } = useTemaConfig(finalBusinessId, {
+    enabled: !dynamicLoading,
+  });
   
   // Mostrar loading si cualquiera de los dos está cargando
   const isLoading = dynamicLoading || themeLoading;
