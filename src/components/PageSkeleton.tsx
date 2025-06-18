@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ResponsiveSkeleton } from '@/components/ui/skeleton';
 
 interface PageSkeletonProps {
@@ -7,8 +7,25 @@ interface PageSkeletonProps {
 }
 
 export const PageSkeleton: React.FC<PageSkeletonProps> = ({ children }) => {
+  // While the skeleton is visible, remove the dynamic background image
+  useEffect(() => {
+    const root = document.documentElement;
+    const prev = root.style.getPropertyValue('--dynamic-background-image');
+    root.style.setProperty('--dynamic-background-image', 'none');
+    return () => {
+      if (prev) {
+        root.style.setProperty('--dynamic-background-image', prev);
+      } else {
+        root.style.removeProperty('--dynamic-background-image');
+      }
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-white flex flex-col animate-pulse">
+    <div
+      className="min-h-screen flex flex-col animate-pulse"
+      style={{ background: 'hsl(var(--dynamic-background-color))' }}
+    >
       {children}
     </div>
   );
