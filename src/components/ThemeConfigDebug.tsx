@@ -5,7 +5,9 @@ import { useDynamicBusinessId } from '../contexts/DynamicBusinessIdContext';
 
 export const ThemeConfigDebug: React.FC = () => {
   const { businessId, subdomain, isLoading: businessLoading } = useDynamicBusinessId();
-  const { config, isLoading: themeLoading, error } = useTemaConfig(businessId || '');
+  const { config, isLoading: themeLoading, error } = useTemaConfig(businessId || '', {
+    enabled: !businessLoading,
+  });
 
   // Only show in development
   if (process.env.NODE_ENV !== 'development') {
