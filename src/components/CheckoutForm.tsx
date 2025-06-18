@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useCart } from '../contexts/CartContext';
 import { useDynamicBusinessId } from '../contexts/DynamicBusinessIdContext';
 import { Tag, X, ArrowLeft } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { formatPrice } from '../utils/currency';
 import { CustomerForm } from './CustomerForm';
@@ -475,6 +476,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ isOpen, onClose }) =
               onClick={handleWhatsAppCheckout}
               className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold py-3 rounded-xl hover:from-green-600 hover:to-green-700 transition-all duration-200 flex items-center justify-center space-x-2"
             >
+              <FaWhatsapp size={20} />
               <span>Enviar por WhatsApp</span>
             </button>
           )}

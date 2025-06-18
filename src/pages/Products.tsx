@@ -10,7 +10,8 @@ import { BannerSlider } from '../components/BannerSlider';
 import { ProductsPageSkeleton } from '../components/ProductsPageSkeleton';
 import { useSupabaseCategories } from '../hooks/useSupabaseCategories';
 import { useDynamicBusinessId } from '../contexts/DynamicBusinessIdContext';
-import { Filter, Grid, List, MessageCircle } from 'lucide-react';
+import { Filter, Grid, List } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ProductModal } from '../components/ProductModal';
 import { useProductFilters } from '../hooks/useProductFilters';
@@ -189,8 +190,14 @@ const Products = () => {
       <ProductModal product={selectedProduct} isOpen={!!selectedProduct} onClose={closeProductModal} />
 
       {/* Botón de WhatsApp flotante */}
-      <a href={formatWhatsAppUrl(businessConfig.whatsapp || APP_CONFIG.WHATSAPP_NUMBER)} target="_blank" rel="noopener noreferrer" className={`fixed bottom-4 left-4 bg-green-500 text-white rounded-full p-2.5 shadow-lg hover:bg-green-600 ${UI_CONFIG.TRANSITION_CLASSES} z-40 flex items-center justify-center`} aria-label="Contactar por WhatsApp">
-        <MessageCircle size={20} />
+      <a
+        href={formatWhatsAppUrl(businessConfig.whatsapp || APP_CONFIG.WHATSAPP_NUMBER)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`fixed bottom-4 left-4 bg-green-500 text-white rounded-full p-4 shadow-lg hover:bg-green-600 ${UI_CONFIG.TRANSITION_CLASSES} z-40 flex items-center justify-center`}
+        aria-label="Contactar por WhatsApp"
+      >
+        <FaWhatsapp size={24} />
         <span className="sr-only">Contactar por WhatsApp</span>
       </a>
     </div>;
