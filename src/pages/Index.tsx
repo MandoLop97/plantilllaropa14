@@ -14,7 +14,7 @@ import { useDynamicBusinessId } from '../contexts/DynamicBusinessIdContext';
 import { useDynamicPageMeta } from '../hooks/useDynamicPageMeta';
 import { useTrackBusinessView } from '../hooks/useTrackBusinessView';
 import { useCleanupOldViews } from '../hooks/useCleanupOldViews';
-import { MessageCircle } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { scrollToElement, scrollToTop } from '../utils/scroll';
 import { formatWhatsAppUrl } from '../utils/format';
 import { APP_CONFIG } from '../constants/app';
@@ -106,9 +106,15 @@ const Index = () => {
       {/* Floating Cart with item count indicator */}
       <FloatingCart onClick={() => setIsCartOpen(true)} />
       
-      {/* WhatsApp Button - Ahora más grande */}
-      <a href={formatWhatsAppUrl(businessConfig.whatsapp || APP_CONFIG.WHATSAPP_NUMBER)} target="_blank" rel="noopener noreferrer" className="fixed bottom-4 left-4 bg-green-500 text-white rounded-full p-4 shadow-lg hover:bg-green-600 transition-all duration-200 transform hover:scale-105 z-40 flex items-center justify-center" aria-label="Contactar por WhatsApp">
-        <MessageCircle size={24} />
+      {/* WhatsApp Button - Tamaño unificado */}
+      <a
+        href={formatWhatsAppUrl(businessConfig.whatsapp || APP_CONFIG.WHATSAPP_NUMBER)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-4 left-4 bg-green-500 text-white rounded-full p-4 shadow-lg hover:bg-green-600 transition-all duration-200 transform hover:scale-105 z-40 flex items-center justify-center"
+        aria-label="Contactar por WhatsApp"
+      >
+        <FaWhatsapp size={24} />
         <span className="sr-only">Contactar por WhatsApp</span>
       </a>
       
