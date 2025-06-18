@@ -50,6 +50,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ categories, isOpen, onClose, o
                     src={businessConfig.logo.url}
                     alt={businessConfig.logo.alt}
                     className="w-full h-full object-contain"
+                    loading="lazy"
                   />
                 ) : (
                   <span className="text-white text-lg sm:text-2xl font-bold">
@@ -136,6 +137,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ categories, isOpen, onClose, o
                           src={category.imagen_url}
                           alt={category.name}
                           className="w-full h-full object-cover"
+                          loading="lazy"
                         />
                       ) : category.icon ? (
                         <span className="text-base sm:text-lg">{category.icon}</span>

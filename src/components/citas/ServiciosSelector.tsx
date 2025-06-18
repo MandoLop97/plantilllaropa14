@@ -211,10 +211,11 @@ export const ServiciosSelector: React.FC<ServiciosSelectorProps> = ({
               </CardHeader>
               <CardContent className="space-y-3 sm:space-y-4">
                 <div className="aspect-video rounded-lg overflow-hidden bg-gray-100 relative">
-                  <img 
-                    src={servicio.imagenUrl} 
-                    alt={servicio.nombre} 
+                  <img
+                    src={servicio.imagenUrl}
+                    alt={servicio.nombre}
                     className="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
+                    loading="lazy"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.src = '/placeholder.svg';

@@ -72,10 +72,11 @@ export const PWAInstallPrompt: React.FC = () => {
     <Card className="fixed bottom-20 left-4 right-4 md:left-auto md:right-4 md:w-80 p-4 shadow-lg z-50 bg-background border">
       <div className="flex items-start gap-3">
         <div className="flex-shrink-0">
-          <img 
-            src={businessConfig.logo.url} 
+          <img
+            src={businessConfig.logo.url}
             alt={businessConfig.logo.alt}
             className="w-10 h-10 rounded-lg object-cover"
+            loading="lazy"
           />
         </div>
         <div className="flex-1 min-w-0">

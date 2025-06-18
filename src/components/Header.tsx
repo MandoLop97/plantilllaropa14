@@ -86,6 +86,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                   src={businessConfig.logo.url}
                   alt={businessConfig.logo.alt}
                   className="w-full h-full object-contain"
+                  loading="lazy"
                 />
               </div>
               <h1 className="text-lg sm:text-2xl font-extrabold tracking-tight transition-colors duration-200"
