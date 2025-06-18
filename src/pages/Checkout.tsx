@@ -489,6 +489,7 @@ export default function Checkout() {
                       src={item.image}
                       alt={item.name}
                       className="w-8 h-8 object-cover rounded-md"
+                      loading="lazy"
                     />
                     <div className="flex-1 min-w-0">
                       <h4 className="font-medium text-gray-900 text-xs truncate">{item.name}</h4>
@@ -521,6 +522,7 @@ export default function Checkout() {
                       src={businessConfig.logo.url}
                       alt={businessConfig.logo.alt}
                       className="w-6 h-6 object-contain rounded"
+                      loading="lazy"
                     />
                   ) : (
                     <div className="w-6 h-6 bg-primary-100 rounded flex items-center justify-center">
