@@ -1,12 +1,14 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { HeroSection } from '../components/HeroSection';
 import { ProductSection } from '../components/ProductSection';
 import { PromotionBanner } from '../components/PromotionBanner';
+import { BusinessMap } from '../components/BusinessMap';
 import { Footer } from '../components/Footer';
 import { FloatingCart } from '../components/FloatingCart';
 import { Cart } from '../components/Cart';
 import { Sidebar } from '../components/Sidebar';
+import { PWAInstallPrompt } from '../components/PWAInstallPrompt';
 import { useSupabaseCategories } from '../hooks/useSupabaseCategories';
 import { useDynamicBusinessId } from '../contexts/DynamicBusinessIdContext';
 import { useDynamicPageMeta } from '../hooks/useDynamicPageMeta';
@@ -17,9 +19,6 @@ import { scrollToElement, scrollToTop } from '../utils/scroll';
 import { formatWhatsAppUrl } from '../utils/format';
 import { APP_CONFIG } from '../constants/app';
 import { logger } from '../utils/logger';
-
-const BusinessMap = React.lazy(() => import('../components/BusinessMap'));
-const PWAInstallPrompt = React.lazy(() => import('../components/PWAInstallPrompt'));
 const Index = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -96,9 +95,7 @@ const Index = () => {
           <PromotionBanner />
         </div>
         <div className="bg-semi-transparent py-0 px-0">
-          <Suspense fallback={<div className="h-80 bg-neutral-200 animate-pulse" />}> 
-            <BusinessMap />
-          </Suspense>
+          <BusinessMap />
         </div>
       </main>
       
@@ -122,9 +119,7 @@ const Index = () => {
       </a>
       
       {/* PWA Install Prompt */}
-      <Suspense fallback={null}>
-        <PWAInstallPrompt />
-      </Suspense>
+      <PWAInstallPrompt />
       
       {/* Cart with overlay */}
       <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
