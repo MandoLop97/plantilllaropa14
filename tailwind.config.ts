@@ -152,28 +152,23 @@ export default {
 						opacity: '1'
 					}
 				},
-                                'shimmer': {
-                                        '0%': {
-                                                backgroundPosition: '-200% 0'
-                                        },
-                                        '100%': {
-                                                backgroundPosition: '200% 0'
-                                        }
-                                },
-                                'skeleton-hue': {
-                                        '0%': { filter: 'hue-rotate(0deg)' },
-                                        '100%': { filter: 'hue-rotate(360deg)' }
-                                }
-                        },
-                        animation: {
-                                'accordion-down': 'accordion-down 0.2s ease-out',
-                                'accordion-up': 'accordion-up 0.2s ease-out',
-                                'fade-in': 'fade-in 0.3s ease-out',
-                                'scale-in': 'scale-in 0.2s ease-out',
-                                'shimmer': 'shimmer 2s linear infinite',
-                                'skeleton-hue': 'skeleton-hue 6s linear infinite'
-                        }
-                }
-        },
-        plugins: [require("tailwindcss-animate")],
+				'shimmer': {
+					'0%': {
+						backgroundPosition: '-200% 0'
+					},
+					'100%': {
+						backgroundPosition: '200% 0'
+					}
+				}
+			},
+			animation: {
+				'accordion-down': 'accordion-down 0.2s ease-out',
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.3s ease-out',
+				'scale-in': 'scale-in 0.2s ease-out',
+				'shimmer': 'shimmer 2s linear infinite'
+			}
+		}
+	},
+	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
