@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
           {/* Logo y nombre dinámico - clickeable */}
           <button onClick={() => navigate('/')} className="flex items-center justify-center gap-2 mb-4 group select-none focus:outline-none focus:ring-2 focus:ring-primary-400 rounded-lg p-2 mx-auto">
             <div className="w-9 h-9 sm:w-12 sm:h-12 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center shadow-md transition-transform duration-200 group-hover:scale-110 overflow-hidden">
-              <img src={businessConfig.logo.url} alt={businessConfig.logo.alt} className="w-full h-full object-contain" />
+              <img src={businessConfig.logo.url} alt={businessConfig.logo.alt} className="w-full h-full object-contain" loading="lazy" />
             </div>
             <h3 className="text-lg sm:text-2xl font-extrabold text-primary-950 tracking-tight group-hover:text-primary-600 transition-colors duration-200">
               {businessConfig.name}

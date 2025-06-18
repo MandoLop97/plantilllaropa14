@@ -6,11 +6,13 @@ import { ThemeConfigProvider } from './contexts/ThemeConfigContext';
 import { DynamicBusinessIdProvider } from './contexts/DynamicBusinessIdContext';
 import { Toaster } from './components/ui/toaster';
 import ScrollToTopButton from './components/ScrollToTopButton';
-import Index from './pages/Index';
-import Products from './pages/Products';
-import Citas from './pages/Citas';
-import Checkout from './pages/Checkout';
-import NotFound from './pages/NotFound';
+import { lazy, Suspense } from 'react';
+
+const Index = lazy(() => import('./pages/Index'));
+const Products = lazy(() => import('./pages/Products'));
+const Citas = lazy(() => import('./pages/Citas'));
+const Checkout = lazy(() => import('./pages/Checkout'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 import './App.css';
 import { useServiceWorkerUpdater } from './hooks/useServiceWorkerUpdater';
 
@@ -26,17 +28,22 @@ const queryClient = new QueryClient({
 function AppContent() {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/productos" element={<Products />} />
-        <Route path="/citas" element={<Citas />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/negocio/:subdominio" element={<Index />} />
-        <Route path="/negocio/:subdominio/productos" element={<Products />} />
-        <Route path="/negocio/:subdominio/citas" element={<Citas />} />
-        <Route path="/negocio/:subdominio/checkout" element={<Checkout />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/productos" element={<Products />} />
+          <Route path="/citas" element={<Citas />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/negocio/:subdominio" element={<Index />} />
+          <Route
+            path="/negocio/:subdominio/productos"
+            element={<Products />}
+          />
+          <Route path="/negocio/:subdominio/citas" element={<Citas />} />
+          <Route path="/negocio/:subdominio/checkout" element={<Checkout />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
       
       {/* Scroll to Top Button - aparece en todas las páginas */}
       <ScrollToTopButton />
