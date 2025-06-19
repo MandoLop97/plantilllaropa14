@@ -14,7 +14,6 @@ const Citas = lazy(() => import('./pages/Citas'));
 const Checkout = lazy(() => import('./pages/Checkout'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 import './App.css';
-import { useServiceWorkerUpdater } from './hooks/useServiceWorkerUpdater';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -52,7 +51,6 @@ function AppContent() {
 }
 
 function App() {
-  useServiceWorkerUpdater();
   return (
     <QueryClientProvider client={queryClient}>
       <DynamicBusinessIdProvider>
