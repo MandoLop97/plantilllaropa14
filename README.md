@@ -140,3 +140,9 @@ Cualquier componente que utilice `var(--font-primary)` o `var(--font-secondary)`
 La aplicación obtiene su apariencia desde la tabla `tema_config` en Supabase. El campo `configuracion` almacena un JSON con todos los colores, tipografías y ajustes visuales necesarios. Al iniciar, `useTemaConfig` recupera este objeto y ejecuta `applyThemeFromJson`, actualizando las variables CSS en tiempo real. La forma recomendada de exponer tu aplicación es envolviéndola con `ThemeConfigProvider`, así todos los componentes pueden acceder a `ThemeConfigContext`. Consulta [docs/tema_config.md](docs/tema_config.md) para ver la estructura completa y un ejemplo práctico.
 
 Si la consulta a Supabase falla se aplican los valores definidos en `src/index.css` y `DEFAULT_THEME`. Estos colores y fuentes sirven como configuración de respaldo.
+
+## Mini-apps
+
+- [x] HeroSection (`/HeroSection/dist`)
+- [ ] Pendiente...
+
